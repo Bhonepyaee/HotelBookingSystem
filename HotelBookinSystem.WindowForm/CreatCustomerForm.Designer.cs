@@ -54,9 +54,9 @@
             label1.ForeColor = SystemColors.ActiveCaption;
             label1.Location = new Point(252, 18);
             label1.Name = "label1";
-            label1.Size = new Size(322, 33);
+            label1.Size = new Size(338, 231);
             label1.TabIndex = 1;
-            label1.Text = "Create New Customer";
+            label1.Text = "Create New Customers\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
             // 
             // label2
             // 
