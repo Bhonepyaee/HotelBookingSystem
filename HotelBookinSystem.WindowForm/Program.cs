@@ -1,3 +1,6 @@
+using HotelBookinSystem.WindowForm.AppDbContextModels;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace HotelBookinSystem.WindowForm
 {
     internal static class Program
@@ -8,10 +11,12 @@ namespace HotelBookinSystem.WindowForm
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            var serviceProvider = new ServiceCollection()
+                .AddDbContext<AppDbContext>()
+                .BuildServiceProvider();
+            var context = serviceProvider.GetRequiredService<AppDbContext>();
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoginForm());
+            Application.Run(new LoginForm(context));
         }
     }
 }
