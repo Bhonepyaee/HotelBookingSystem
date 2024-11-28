@@ -8,6 +8,7 @@ namespace HotelBookinSystem.WindowForm
     public partial class LoginForm : Form
     {
         internal readonly AppDbContext _context;
+
         public LoginForm(AppDbContext context)
         {
             InitializeComponent();
@@ -24,11 +25,28 @@ namespace HotelBookinSystem.WindowForm
                 if (!email.IsNullOrEmpty() && !password.IsNullOrEmpty())
                 {
                     var item = await _context.TblAdmins
-                        .AsNoTracking()
-                        .FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+                        .FirstOrDefaultAsync(x => x.Email == email);
+
                     if (item is null)
                     {
                         MessageBox.Show("Login Fail.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (item.FailCount >= 3)
+                    {
+                        MessageBox.Show("Account Locked.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (!item.Password.Equals(password))
+                    {
+                        MessageBox.Show("Incorrect Password.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        item.FailCount += 1;
+                        _context.TblAdmins.Update(item);
+                        await _context.SaveChangesAsync();
+
                         return;
                     }
 
