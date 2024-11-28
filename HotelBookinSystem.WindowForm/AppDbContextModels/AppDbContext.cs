@@ -4,21 +4,19 @@ namespace HotelBookinSystem.WindowForm.AppDbContextModels;
 
 public partial class AppDbContext : DbContext
 {
-    public AppDbContext()
-    {
-    }
+    public AppDbContext() { }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<TblAdmin> TblAdmins { get; set; }
 
     public virtual DbSet<TblBlog> TblBlogs { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=.;Database=BhonePyae;User ID=sa;Password=sasa@123;TrustServerCertificate=True;");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseSqlServer(
+            "Server=.;Database=BhonePyae;User ID=sa;Password=sasa@123;TrustServerCertificate=True;"
+        );
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
