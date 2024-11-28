@@ -27,24 +27,38 @@ public partial class LoginForm : Form
 
             if (!email.IsNullOrEmpty() && !password.IsNullOrEmpty())
             {
-                var item = await _context.TblAdmins
-                    .FirstOrDefaultAsync(x => x.Email == email);
+                var item = await _context.TblAdmins.FirstOrDefaultAsync(x => x.Email == email);
 
                 if (item is null)
                 {
-                    MessageBox.Show("Login Fail.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Login Fail.",
+                        "Warning",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Warning
+                    );
                     return;
                 }
 
                 if (item.FailCount >= 3)
                 {
-                    MessageBox.Show("Account Locked.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Account Locked.",
+                        "Warning",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Warning
+                    );
                     return;
                 }
 
                 if (!item.Password.Equals(password))
                 {
-                    MessageBox.Show("Incorrect Password.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Incorrect Password.",
+                        "Warning",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Warning
+                    );
 
                     item.FailCount += 1;
                     _context.TblAdmins.Update(item);
@@ -59,12 +73,17 @@ public partial class LoginForm : Form
                     {
                         UserId = item.UserId,
                         Email = item.Email,
-                        Password = item.Password
+                        Password = item.Password,
                     };
                     await File.WriteAllTextAsync(_path, userInfo.ToJson());
                 }
 
-                MessageBox.Show("Login Successful.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Login Successful.",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
         }
         catch (Exception ex)
