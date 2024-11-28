@@ -39,7 +39,7 @@
             pictureBox3 = new PictureBox();
             btnLogin = new Button();
             button3 = new Button();
-            checkBox1 = new CheckBox();
+            cboRememberMe = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -160,20 +160,20 @@
             button3.Text = "Forgot Password";
             button3.UseVisualStyleBackColor = false;
             // 
-            // checkBox1
+            // cboRememberMe
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Cursor = Cursors.Hand;
-            checkBox1.ForeColor = SystemColors.Highlight;
-            checkBox1.Location = new Point(115, 551);
-            checkBox1.Margin = new Padding(3, 4, 3, 4);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(129, 24);
-            checkBox1.TabIndex = 7;
-            checkBox1.Text = "Remember Me";
-            checkBox1.UseVisualStyleBackColor = true;
+            cboRememberMe.AutoSize = true;
+            cboRememberMe.Checked = true;
+            cboRememberMe.CheckState = CheckState.Checked;
+            cboRememberMe.Cursor = Cursors.Hand;
+            cboRememberMe.ForeColor = SystemColors.Highlight;
+            cboRememberMe.Location = new Point(115, 551);
+            cboRememberMe.Margin = new Padding(3, 4, 3, 4);
+            cboRememberMe.Name = "cboRememberMe";
+            cboRememberMe.Size = new Size(129, 24);
+            cboRememberMe.TabIndex = 7;
+            cboRememberMe.Text = "Remember Me";
+            cboRememberMe.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
@@ -181,7 +181,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 244, 247);
             ClientSize = new Size(561, 875);
-            Controls.Add(checkBox1);
+            Controls.Add(cboRememberMe);
             Controls.Add(button3);
             Controls.Add(btnLogin);
             Controls.Add(panel2);
@@ -195,6 +195,7 @@
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            Load += LoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -218,6 +219,6 @@
         private PictureBox pictureBox3;
         private Button btnLogin;
         private Button button3;
-        private CheckBox checkBox1;
+        private CheckBox cboRememberMe;
     }
 }
