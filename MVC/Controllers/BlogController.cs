@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
@@ -9,6 +10,7 @@ namespace MVC.Controllers
     public class BlogController : Controller
     {
         internal readonly IConfiguration _configuration;
+
         public BlogController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -20,15 +22,57 @@ namespace MVC.Controllers
             try
             {
                 string query = BlogQuery.BlogListQuery;
-                using IDbConnection db = new SqlConnectionn(_configuration.GetConnectionString("DbConnection"));
+                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection")); 
                 var lst = await db.QueryAsync<BlogModel>(query);
 
-                return View();
+                return View(lst.ToList());
             }
             catch(Exception ex)
-            { 
+            {
                 throw new Exception(ex.Message);
             }
         }
+
+        [ActionName("CreateBlogPage")]
+        public IActionResult CreateBlog()
+        {
+            return View();
+        }
+
+        [ActionName("SaveAsync")]
+        [HttpPost]
+        public async Task<IActionResult> SaveAsync(BlogRequestModel requestModel)
+        {
+            try
+            {
+                string query = BlogQuery.CreateBlogQuery;
+                var parameters = new
+                {
+                    requestModel.BlogTitle,
+                    requestModel.BlogAuthor,
+                    requestModel.BlogContent,
+                };
+
+                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+
+                int result = await db.ExecuteAsync(query, parameters);
+                if (result > 0)
+                {
+                    TempData["success"] = "Saving Successful.";
+                }
+                else
+                {
+                    TempData["fail"] = "Saving Fail.";
+                }
+
+                return RedirectToAction("BlogListPage");
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
     }
 }

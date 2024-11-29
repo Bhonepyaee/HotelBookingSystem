@@ -1,6 +1,6 @@
-﻿namespace CRUD
+﻿namespace CRUD1
 {
-    partial class CreateBlogForm
+    partial class UpdateBlogForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,83 +41,83 @@
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(58, 45);
+            btnBack.Location = new Point(65, 55);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(75, 23);
-            btnBack.TabIndex = 17;
+            btnBack.TabIndex = 35;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
             btnBack.Click += btnBack_Click;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(670, 410);
+            btnSave.Location = new Point(679, 405);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 23);
-            btnSave.TabIndex = 16;
+            btnSave.TabIndex = 34;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
             // txtBlogAuthor
             // 
-            txtBlogAuthor.Location = new Point(412, 225);
+            txtBlogAuthor.Location = new Point(427, 222);
             txtBlogAuthor.Name = "txtBlogAuthor";
             txtBlogAuthor.Size = new Size(87, 23);
-            txtBlogAuthor.TabIndex = 15;
+            txtBlogAuthor.TabIndex = 33;
             // 
             // txtBlogContent
             // 
-            txtBlogContent.Location = new Point(412, 286);
+            txtBlogContent.Location = new Point(427, 283);
             txtBlogContent.Name = "txtBlogContent";
             txtBlogContent.Size = new Size(87, 23);
-            txtBlogContent.TabIndex = 14;
+            txtBlogContent.TabIndex = 32;
             // 
             // txtBlogTitle
             // 
-            txtBlogTitle.Location = new Point(412, 166);
+            txtBlogTitle.Location = new Point(427, 163);
             txtBlogTitle.Name = "txtBlogTitle";
             txtBlogTitle.Size = new Size(87, 23);
-            txtBlogTitle.TabIndex = 13;
+            txtBlogTitle.TabIndex = 31;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(306, 233);
+            label4.Location = new Point(321, 230);
             label4.Name = "label4";
             label4.Size = new Size(71, 15);
-            label4.TabIndex = 12;
+            label4.TabIndex = 30;
             label4.Text = "BlogAuthor:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(306, 174);
+            label3.Location = new Point(321, 171);
             label3.Name = "label3";
             label3.Size = new Size(56, 15);
-            label3.TabIndex = 11;
+            label3.TabIndex = 29;
             label3.Text = "BlogTitle:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(306, 294);
+            label2.Location = new Point(321, 291);
             label2.Name = "label2";
             label2.Size = new Size(77, 15);
-            label2.TabIndex = 10;
+            label2.TabIndex = 28;
             label2.Text = "BlogContent:";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Castellar", 36F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(201, 25);
+            label1.Location = new Point(251, 34);
             label1.Name = "label1";
-            label1.Size = new Size(389, 58);
-            label1.TabIndex = 9;
-            label1.Text = "Create Blog";
+            label1.Size = new Size(308, 58);
+            label1.TabIndex = 27;
+            label1.Text = "Edit Blog";
             // 
-            // CreateBlogForm
+            // UpdateBlogForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -131,10 +131,9 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "CreateBlogForm";
-            Text = "CreateBlogForm";
-            FormClosed += CreateBlogForm_FormClosed;
-            Load += CreateBlogForm_Load;
+            Name = "UpdateBlogForm";
+            Text = "UpdateBlogForm";
+            Load += UpdateBlogForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

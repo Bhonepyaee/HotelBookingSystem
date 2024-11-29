@@ -31,7 +31,7 @@ namespace CRUD
 
                 #endregion
 
-              
+
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace CRUD
         {
             int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-            if(e.ColumnIndex == 4)
+            if (e.ColumnIndex == 4)
             {
                 string blogTitle = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells[1].Value)!;
                 string blogAuthor = Convert.ToString(dataGridView1.Rows[e.RowIndex].Cells[2].Value)!;
@@ -66,19 +66,19 @@ namespace CRUD
                 this.Hide();
             }
 
-            if(e.ColumnIndex == 5)
+            if (e.ColumnIndex == 5)
             {
                 try
                 {
                     DialogResult dialogResult = MessageBox.Show
                     ("Are you sure,Do u wanna delete this?", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                    if(dialogResult == DialogResult.OK)
+                    if (dialogResult == DialogResult.OK)
                     {
                         string query =
                         @"DELETE FROM Tbl_Blog WHERE BlogId = @BlogId";
 
-                        SqlParameter parameter = new("@BlogId",id);
+                        SqlParameter parameter = new("@BlogId", id);
 
                         SqlConnection connection = new(DbConfig._connectionString);
                         await connection.OpenAsync();
@@ -89,7 +89,7 @@ namespace CRUD
                         int result = await command.ExecuteNonQueryAsync();
                         await connection.CloseAsync();
 
-                        if(result > 0)
+                        if (result > 0)
                         {
                             MessageBox.Show("Deleting Successful.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -128,6 +128,11 @@ namespace CRUD
 
             await connection.CloseAsync();
             dataGridView1.DataSource = dt;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

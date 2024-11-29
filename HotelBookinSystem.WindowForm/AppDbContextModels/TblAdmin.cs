@@ -1,4 +1,5 @@
-﻿namespace HotelBookinSystem.WindowForm.AppDbContextModels;
+﻿
+namespace HotelBookinSystem.WindowForm.AppDbContextModels;
 
 public partial class TblAdmin
 {

@@ -1,4 +1,4 @@
-﻿namespace CRUD
+﻿namespace CRUD1
 {
     partial class Form1
     {
@@ -37,10 +37,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(569, 68);
+            button1.Location = new Point(572, 94);
             button1.Name = "button1";
             button1.Size = new Size(99, 23);
-            button1.TabIndex = 5;
+            button1.TabIndex = 8;
             button1.Text = "Add New Blog";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -53,23 +53,23 @@
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(24, 97);
+            dataGridView1.Location = new Point(27, 123);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.Size = new Size(744, 224);
-            dataGridView1.TabIndex = 4;
+            dataGridView1.TabIndex = 7;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.SizeChanged += Form1_Load;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Candara Light", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(243, 28);
+            label1.Location = new Point(246, 54);
             label1.Name = "label1";
             label1.Size = new Size(306, 45);
-            label1.TabIndex = 3;
+            label1.TabIndex = 6;
             label1.Text = "Blog Management";
-            label1.Click += label1_Click;
             // 
             // Form1
             // 

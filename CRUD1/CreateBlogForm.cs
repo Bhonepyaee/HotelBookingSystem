@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CRUD.Config;
+using CRUD1.Config;
 
-namespace CRUD
+namespace CRUD1
 {
     public partial class CreateBlogForm : Form
     {
@@ -19,9 +19,14 @@ namespace CRUD
             InitializeComponent();
         }
 
+        private void CreateBlogForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new();
+            Form1 form1 = new Form1();
             form1.Show();
             this.Hide();
         }
@@ -35,50 +40,42 @@ namespace CRUD
                 string blogContent = txtBlogContent.Text;
 
                 string query =
-                    @"INSERT INTO Tbl_Blog (BlogTitle,BlogAuthor,BlogContent)
-                    VALUES (@BlogTitle,@BlogAuthor,@BlogContent)";
+                    @"INSERT INTO Tbl_Blog(BlogTitle,BlogAuthor,BlogContent)
+                    VALUES(@BlogTitle,@BlogAuthor,@BlogContent)";
                 List<SqlParameter> parameters = new()
                 {
-                    new("@BlogTitle",blogTitle),
-                    new("@BlogAuthor",blogAuthor),
-                    new("@BlogContent",blogContent)
+                    new ("@BlogTitle",blogTitle),
+                    new ("@BlogAuthor",blogAuthor),
+                    new ("@BlogContent",blogContent)
                 };
 
-                SqlConnection connection = new(DbConfig._connectionString);
+                SqlConnection connection = new SqlConnection(DbConfig._connectionString);
                 await connection.OpenAsync();
 
-                SqlCommand command = new(query, connection);
+                SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddRange(parameters.ToArray());
 
                 int result = await command.ExecuteNonQueryAsync();
                 await connection.CloseAsync();
 
-                if (result > 0)
+                if(result > 0)
                 {
-                    MessageBox.Show("Saving Successful.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Saving Successfull.","Successful",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-                    Form1 form1 = new();
+                    Form1 form1 = new Form1();
                     form1.Show();
                     this.Hide();
 
                     return;
                 }
-                MessageBox.Show("Saving Fail.", "Fail", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
+
+                MessageBox.Show("Saving Fail.", "Error.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+
+
+            }catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-        }
-
-        private void CreateBlogForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void CreateBlogForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
