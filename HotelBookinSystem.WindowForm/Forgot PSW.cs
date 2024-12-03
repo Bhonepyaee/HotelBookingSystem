@@ -28,8 +28,8 @@ namespace HotelBookinSystem.WindowForm
                     "evzd omax jylb pdzn"
                 );
             var sericeProvider = serviceCollection.BuildServiceProvider();
-
             var _fluentEmail = sericeProvider.GetRequiredService<IFluentEmail>();
+
             _email = _fluentEmail;
         }
 
