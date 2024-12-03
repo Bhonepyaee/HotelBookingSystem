@@ -81,7 +81,7 @@ namespace HotelBookinSystem.WindowForm
         private string GetSixDigitRandomNumber()
         {
             Random r = new();
-            int randNum = r.Next(100000, 1000000); // Generates a number between 100000 and 999999
+            int randNum = r.Next(100000, 1000000);
             return randNum.ToString();
         }
     }
