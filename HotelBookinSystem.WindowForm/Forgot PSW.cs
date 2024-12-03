@@ -61,7 +61,7 @@ namespace HotelBookinSystem.WindowForm
                         OtpValue = Convert.ToInt32(otpValue),
                         CreatedAt = DateTime.Now,
                         UserId = user.UserId,
-                        IsDeleted = false,
+                        IsDeleted = false
                     };
                     await _context.TblOtps.AddAsync(otp);
                     await _context.SaveChangesAsync();
