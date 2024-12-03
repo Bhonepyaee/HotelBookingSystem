@@ -29,55 +29,59 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            textBox1 = new TextBox();
+            txtEmail = new TextBox();
             label2 = new Label();
-            button1 = new Button();
+            btnSend = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(280, 46);
+            label1.Location = new Point(320, 9);
             label1.Name = "label1";
-            label1.Size = new Size(226, 37);
+            label1.Size = new Size(279, 46);
             label1.TabIndex = 0;
             label1.Text = "ForgotPassword";
             // 
-            // textBox1
+            // txtEmail
             // 
-            textBox1.Location = new Point(372, 177);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(108, 23);
-            textBox1.TabIndex = 1;
+            txtEmail.Location = new Point(414, 127);
+            txtEmail.Margin = new Padding(3, 4, 3, 4);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(173, 27);
+            txtEmail.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(322, 180);
+            label2.Location = new Point(339, 130);
             label2.Name = "label2";
-            label2.Size = new Size(44, 15);
+            label2.Size = new Size(55, 20);
             label2.TabIndex = 2;
             label2.Text = "Gmail :";
             // 
-            // button1
+            // btnSend
             // 
-            button1.Location = new Point(669, 372);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 3;
-            button1.Text = "Send";
-            button1.UseVisualStyleBackColor = true;
+            btnSend.Location = new Point(501, 201);
+            btnSend.Margin = new Padding(3, 4, 3, 4);
+            btnSend.Name = "btnSend";
+            btnSend.Size = new Size(86, 31);
+            btnSend.TabIndex = 3;
+            btnSend.Text = "Send";
+            btnSend.UseVisualStyleBackColor = true;
+            btnSend.Click += btnSend_Click;
             // 
             // Forgot_PSW
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            ClientSize = new Size(914, 600);
+            Controls.Add(btnSend);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(txtEmail);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Forgot_PSW";
             Text = "Forgot_PSW";
             ResumeLayout(false);
@@ -87,8 +91,8 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txtEmail;
         private Label label2;
-        private Button button1;
+        private Button btnSend;
     }
 }

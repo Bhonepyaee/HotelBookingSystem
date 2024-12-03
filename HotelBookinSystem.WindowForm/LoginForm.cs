@@ -102,4 +102,11 @@ public partial class LoginForm : Form
             txtPassword.Text = userInfoModel.Password;
         }
     }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+        Forgot_PSW forgot_PSW = new();
+        forgot_PSW.Show();
+        this.Hide();
+    }
 }

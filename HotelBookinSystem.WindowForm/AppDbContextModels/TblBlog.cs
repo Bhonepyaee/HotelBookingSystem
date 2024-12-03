@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+
 namespace HotelBookinSystem.WindowForm.AppDbContextModels;
 
 public partial class TblBlog

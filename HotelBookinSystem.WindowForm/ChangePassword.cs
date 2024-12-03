@@ -12,9 +12,14 @@ namespace HotelBookinSystem.WindowForm
 {
     public partial class ChangePassword : Form
     {
-        public ChangePassword()
+        internal readonly string email;
+        internal readonly string _userId;
+
+        public ChangePassword(string email, string userId)
         {
             InitializeComponent();
+            this.email = email;
+            _userId = userId;
         }
 
         private void ChangePassword_Load(object sender, EventArgs e)
