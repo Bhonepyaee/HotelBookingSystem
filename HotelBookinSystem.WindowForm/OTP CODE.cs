@@ -50,7 +50,7 @@ namespace HotelBookinSystem.WindowForm
                         return;
                     }
 
-                    if (otp.CreatedAt.AddMinutes(1) < DateTime.Now)
+                    if (otp.CreatedAt.AddMinutes(3) < DateTime.Now)
                     {
                         MessageBox.Show("Error", "OTP has expired.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return;

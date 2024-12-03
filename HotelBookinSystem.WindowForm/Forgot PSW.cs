@@ -52,7 +52,7 @@ namespace HotelBookinSystem.WindowForm
                         return;
                     }
 
-                    string otpValue = GetEightDigitRandomNumber();
+                    string otpValue = GetSixDigitRandomNumber();
                     var otp = new TblOtp()
                     {
                         Id = Guid.NewGuid().ToString(),
@@ -64,7 +64,7 @@ namespace HotelBookinSystem.WindowForm
                     await _context.TblOtps.AddAsync(otp);
                     await _context.SaveChangesAsync();
 
-                    string body = $"Here is your OTP Code: {otpValue}. This Code will be expired within one minute.";
+                    string body = $"Here is your OTP Code: {otpValue}. This Code will be expired within 3 minutes.";
                     await _email.To(user.Email).Subject(_subject).Body(body).SendAsync();
 
                     OTP_CODE oTP_CODE = new(user.Email, user.UserId, otp.Id);
@@ -78,10 +78,10 @@ namespace HotelBookinSystem.WindowForm
             }
         }
 
-        private string GetEightDigitRandomNumber()
+        private string GetSixDigitRandomNumber()
         {
             Random r = new();
-            int randNum = r.Next(10000000, 100000000); // Generates a number between 10000000 and 99999999
+            int randNum = r.Next(100000, 1000000); // Generates a number between 100000 and 999999
             return randNum.ToString();
         }
     }
