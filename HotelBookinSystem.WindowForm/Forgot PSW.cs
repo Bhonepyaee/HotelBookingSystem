@@ -20,8 +20,13 @@ namespace HotelBookinSystem.WindowForm
 
             var serviceCollection = new ServiceCollection();
             serviceCollection
-           .AddFluentEmail("lth1212001@gmail.com")
-           .AddSmtpSender("smtp.gmail.com", 587, "lth1212001@gmail.com", "evzd omax jylb pdzn");
+                .AddFluentEmail("lth1212001@gmail.com")
+                .AddSmtpSender(
+                    "smtp.gmail.com",
+                    587,
+                    "lth1212001@gmail.com",
+                    "evzd omax jylb pdzn"
+                );
             var sericeProvider = serviceCollection.BuildServiceProvider();
 
             var _fluentEmail = sericeProvider.GetRequiredService<IFluentEmail>();
@@ -35,11 +40,17 @@ namespace HotelBookinSystem.WindowForm
                 string email = txtEmail.Text;
                 if (!email.IsNullOrEmpty())
                 {
-                    var user = await _context.TblAdmins
-                        .FirstOrDefaultAsync(x => x.Email == email && !x.IsDeleted);
+                    var user = await _context.TblAdmins.FirstOrDefaultAsync(x =>
+                        x.Email == email && !x.IsDeleted
+                    );
                     if (user is null)
                     {
-                        MessageBox.Show("Invalid Email", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(
+                            "Invalid Email",
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
                         return;
                     }
 
@@ -55,7 +66,8 @@ namespace HotelBookinSystem.WindowForm
                     await _context.TblOtps.AddAsync(otp);
                     await _context.SaveChangesAsync();
 
-                    string body = $"Here is your OTP Code: {otpValue}. This Code will be expired within 3 minutes.";
+                    string body =
+                        $"Here is your OTP Code: {otpValue}. This Code will be expired within 3 minutes.";
                     await _email.To(user.Email).Subject(_subject).Body(body).SendAsync();
 
                     OTP_CODE oTP_CODE = new(user.Email, user.UserId, otp.Id);
