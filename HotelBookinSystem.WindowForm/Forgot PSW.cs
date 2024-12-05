@@ -1,6 +1,7 @@
 ﻿using FluentEmail.Core;
 using HotelBookinSystem.WindowForm.AppDbContextModels;
 using HotelBookinSystem.WindowForm.Exrtensions;
+using HotelBookinSystem.WindowForm.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,28 +10,15 @@ namespace HotelBookinSystem.WindowForm
     public partial class Forgot_PSW : Form
     {
         internal readonly AppDbContext _context;
-        internal readonly IFluentEmail _email;
         internal readonly string _subject;
+        internal readonly OtpService _otpService;
 
         public Forgot_PSW()
         {
             InitializeComponent();
-            _context = new AppDbContext();
+            _context = Program.ServiceProvider.GetRequiredService<AppDbContext>();
+            _otpService = Program.ServiceProvider.GetRequiredService<OtpService>();
             _subject = "Reset Password OTP Code";
-
-            var serviceCollection = new ServiceCollection();
-            serviceCollection
-                .AddFluentEmail("lth1212001@gmail.com")
-                .AddSmtpSender(
-                    "smtp.gmail.com",
-                    587,
-                    "lth1212001@gmail.com",
-                    "evzd omax jylb pdzn"
-                );
-            var sericeProvider = serviceCollection.BuildServiceProvider();
-            var _fluentEmail = sericeProvider.GetRequiredService<IFluentEmail>();
-
-            _email = _fluentEmail;
         }
 
         private async void btnSend_Click(object sender, EventArgs e)
@@ -54,23 +42,16 @@ namespace HotelBookinSystem.WindowForm
                         return;
                     }
 
-                    string otpValue = GetSixDigitRandomNumber();
-                    var otp = new TblOtp()
+                    string otpValue = _otpService.GetSixDigitRandomNumber();
+                    string otpId = await _otpService.SendOtpViaEmailAsync(user.UserId, otpValue, user.Email, _subject);
+
+                    if (otpId.IsNullOrEmpty())
                     {
-                        Id = Guid.NewGuid().ToString(),
-                        OtpValue = Convert.ToInt32(otpValue),
-                        CreatedAt = DateTime.Now,
-                        UserId = user.UserId,
-                        IsDeleted = false
-                    };
-                    await _context.TblOtps.AddAsync(otp);
-                    await _context.SaveChangesAsync();
+                        MessageBox.Show("Error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                    string body =
-                        $"Here is your OTP Code: {otpValue}. This Code will be expired within 3 minutes.";
-                    await _email.To(user.Email).Subject(_subject).Body(body).SendAsync();
-
-                    OTP_CODE oTP_CODE = new(user.Email, user.UserId, otp.Id);
+                    OTP_CODE oTP_CODE = new(user.Email, user.UserId, otpId);
                     oTP_CODE.Show();
                     this.Hide();
                 }

@@ -1,6 +1,7 @@
 ﻿using HotelBookinSystem.WindowForm.AppDbContextModels;
 using HotelBookinSystem.WindowForm.Exrtensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace HotelBookinSystem.WindowForm
             InitializeComponent();
             _email = email;
             _userId = userId;
-            _context = new();
+            _context = Program.ServiceProvider.GetRequiredService<AppDbContext>();
         }
 
         private void ChangePassword_Load(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace HotelBookinSystem.WindowForm
                     _context.Update(user);
                     await _context.SaveChangesAsync();
 
-                    LoginForm loginForm = new(_context);
+                    LoginForm loginForm = new();
                     loginForm.Show();
                     this.Hide();
                 }

@@ -1,7 +1,9 @@
 using HotelBookinSystem.WindowForm.AppDbContextModels;
 using HotelBookinSystem.WindowForm.Exrtensions;
 using HotelBookinSystem.WindowForm.Models;
+using HotelBookinSystem.WindowForm.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelBookinSystem.WindowForm;
 
@@ -10,10 +12,10 @@ public partial class LoginForm : Form
     internal readonly AppDbContext _context;
     internal readonly string _path;
 
-    public LoginForm(AppDbContext context)
+    public LoginForm()
     {
         InitializeComponent();
-        _context = context;
+        _context = Program.ServiceProvider.GetRequiredService<AppDbContext>();
         _path = Path.Combine(Directory.GetCurrentDirectory(), "Data/UserInfo.json");
     }
 

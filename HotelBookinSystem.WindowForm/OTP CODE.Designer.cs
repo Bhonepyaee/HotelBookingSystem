@@ -32,6 +32,11 @@
             label2 = new Label();
             txtOtp = new TextBox();
             label1 = new Label();
+            label3 = new Label();
+            lblResend = new LinkLabel();
+            label4 = new Label();
+            label5 = new Label();
+            lblOneMinute = new Label();
             SuspendLayout();
             // 
             // button1
@@ -48,11 +53,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(378, 135);
+            label2.Location = new Point(370, 134);
             label2.Name = "label2";
-            label2.Size = new Size(43, 20);
+            label2.Size = new Size(42, 20);
             label2.TabIndex = 6;
-            label2.Text = "OPT :";
+            label2.Text = "OTP :";
             // 
             // txtOtp
             // 
@@ -72,11 +77,62 @@
             label1.TabIndex = 4;
             label1.Text = "One Time Password";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(324, 215);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 20);
+            label3.TabIndex = 8;
+            label3.Text = "You can";
+            // 
+            // lblResend
+            // 
+            lblResend.AutoSize = true;
+            lblResend.Location = new Point(390, 215);
+            lblResend.Name = "lblResend";
+            lblResend.Size = new Size(87, 20);
+            lblResend.TabIndex = 9;
+            lblResend.TabStop = true;
+            lblResend.Text = "Resend OTP";
+            lblResend.LinkClicked += lblResend_LinkClickedAsync;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(483, 215);
+            label4.Name = "label4";
+            label4.Size = new Size(53, 20);
+            label4.TabIndex = 10;
+            label4.Text = "in next";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(542, 215);
+            label5.Name = "label5";
+            label5.Size = new Size(0, 20);
+            label5.TabIndex = 11;
+            // 
+            // lblOneMinute
+            // 
+            lblOneMinute.AutoSize = true;
+            lblOneMinute.Location = new Point(542, 215);
+            lblOneMinute.Name = "lblOneMinute";
+            lblOneMinute.Size = new Size(74, 20);
+            lblOneMinute.TabIndex = 12;
+            lblOneMinute.Text = "1 seconds";
+            // 
             // OTP_CODE
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 600);
+            Controls.Add(lblOneMinute);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(lblResend);
+            Controls.Add(label3);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(txtOtp);
@@ -95,5 +151,10 @@
         private Label label2;
         private TextBox txtOtp;
         private Label label1;
+        private Label label3;
+        private LinkLabel lblResend;
+        private Label label4;
+        private Label label5;
+        private Label lblOneMinute;
     }
 }

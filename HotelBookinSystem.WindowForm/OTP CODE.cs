@@ -1,12 +1,17 @@
 ﻿using HotelBookinSystem.WindowForm.AppDbContextModels;
 using HotelBookinSystem.WindowForm.Exrtensions;
+using HotelBookinSystem.WindowForm.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +20,14 @@ namespace HotelBookinSystem.WindowForm
 {
     public partial class OTP_CODE : Form
     {
-        internal readonly string _otpId;
+        internal string _otpId;
         internal readonly string _email;
         internal readonly string _userId;
         internal readonly AppDbContext _context;
+        private System.Windows.Forms.Timer timer;
+        private int timeRemaining = 60; // One minute (in seconds)
+        internal readonly OtpService _otpService;
+        internal readonly string _subject;
 
         public OTP_CODE(string email, string userId, string otpId)
         {
@@ -27,11 +36,28 @@ namespace HotelBookinSystem.WindowForm
             _userId = userId;
             _context = new();
             _otpId = otpId;
+            _otpService = Program.ServiceProvider.GetRequiredService<OtpService>();
+            _subject = "Reset Password OTP Code";
         }
 
         private void OTP_CODE_Load(object sender, EventArgs e)
         {
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000; // 1 second
+            timer.Tick += (s, args) =>
+            {
+                lblResend.Enabled = false;
+                timeRemaining--;
+                lblOneMinute.Text = $"{timeRemaining} seconds"; // Update the label
 
+                if (timeRemaining <= 0)
+                {
+                    timer.Stop();
+                    lblResend.Enabled = true;
+                }
+            };
+
+            timer.Start();
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -39,7 +65,7 @@ namespace HotelBookinSystem.WindowForm
             try
             {
                 string otpValue = txtOtp.Text;
-                
+
                 if (!otpValue.IsNullOrEmpty())
                 {
                     var otp = await _context.TblOtps
@@ -70,6 +96,15 @@ namespace HotelBookinSystem.WindowForm
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        private async void lblResend_LinkClickedAsync(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string otpValue = _otpService.GetSixDigitRandomNumber();
+            string otpId = await _otpService.SendOtpViaEmailAsync(_userId, otpValue, _email, _subject);
+
+            _otpId = otpId;
+            MessageBox.Show("OTP Resent!", "Informaion", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
