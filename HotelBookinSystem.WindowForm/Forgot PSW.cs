@@ -42,11 +42,21 @@ public partial class Forgot_PSW : Form
                 }
 
                 string otpValue = _otpService.GetSixDigitRandomNumber();
-                string otpId = await _otpService.SendOtpViaEmailAsync(user.UserId, otpValue, user.Email, _subject);
+                string otpId = await _otpService.SendOtpViaEmailAsync(
+                    user.UserId,
+                    otpValue,
+                    user.Email,
+                    _subject
+                );
 
                 if (otpId.IsNullOrEmpty())
                 {
-                    MessageBox.Show("Error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Error occured.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
