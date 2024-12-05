@@ -16,7 +16,6 @@ public static class Program
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 
-        // Configure DI container
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddDbContext<AppDbContext>();
         serviceCollection.AddTransient<OtpService>();
