@@ -56,17 +56,28 @@ public partial class OTP_CODE : Form
 
             if (!otpValue.IsNullOrEmpty())
             {
-                var otp = await _context.TblOtps
-                    .FirstOrDefaultAsync(x => x.UserId == _userId && x.Id == _otpId && x.OtpValue == Convert.ToInt32(otpValue));
+                var otp = await _context.TblOtps.FirstOrDefaultAsync(x =>
+                    x.UserId == _userId && x.Id == _otpId && x.OtpValue == Convert.ToInt32(otpValue)
+                );
                 if (otp is null)
                 {
-                    MessageBox.Show("Error", "Invalid OTP.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Error",
+                        "Invalid OTP.",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
                 if (otp.CreatedAt.AddMinutes(3) < DateTime.Now)
                 {
-                    MessageBox.Show("Error", "OTP has expired.", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Error",
+                        "OTP has expired.",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
@@ -92,6 +103,11 @@ public partial class OTP_CODE : Form
         string otpId = await _otpService.SendOtpViaEmailAsync(_userId, otpValue, _email, _subject);
 
         _otpId = otpId;
-        MessageBox.Show("OTP Resent!", "Informaion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show(
+            "OTP Resent!",
+            "Informaion",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+        );
     }
 }
