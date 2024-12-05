@@ -1,4 +1,3 @@
-using FluentEmail.Core;
 using HotelBookinSystem.WindowForm.AppDbContextModels;
 using HotelBookinSystem.WindowForm.Services;
 using Microsoft.EntityFrameworkCore;
