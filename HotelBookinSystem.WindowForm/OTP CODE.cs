@@ -3,18 +3,6 @@ using HotelBookinSystem.WindowForm.Exrtensions;
 using HotelBookinSystem.WindowForm.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace HotelBookinSystem.WindowForm
 {
