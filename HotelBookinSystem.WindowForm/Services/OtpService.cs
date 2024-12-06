@@ -25,13 +25,14 @@ public class OtpService
 
     #region Get Six Digit Random Number
 
-    #endregion
     public string GetSixDigitRandomNumber()
     {
         Random r = new();
         int randNum = r.Next(100000, 1000000);
         return randNum.ToString();
     }
+
+    #endregion
 
     public async Task<string> SendOtpViaEmailAsync(
         string userId,
