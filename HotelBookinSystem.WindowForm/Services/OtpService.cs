@@ -1,14 +1,6 @@
 ﻿using FluentEmail.Core;
 using HotelBookinSystem.WindowForm.AppDbContextModels;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBookinSystem.WindowForm.Services
 {
