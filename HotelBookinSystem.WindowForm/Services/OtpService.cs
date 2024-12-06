@@ -34,7 +34,7 @@ public class OtpService
 
     #endregion
 
-    #region SendOtpViaEmailAsync
+    #region Send Otp Via Email Async
 
     #endregion
     public async Task<string> SendOtpViaEmailAsync(
