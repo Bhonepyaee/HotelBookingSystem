@@ -36,7 +36,6 @@ public class OtpService
 
     #region Send Otp Via Email Async
 
-    #endregion
     public async Task<string> SendOtpViaEmailAsync(
         string userId,
         string otpValue,
@@ -60,4 +59,6 @@ public class OtpService
 
         return otp.Id;
     }
+
+    #endregion
 }
