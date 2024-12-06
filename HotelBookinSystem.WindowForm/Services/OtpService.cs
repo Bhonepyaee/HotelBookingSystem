@@ -23,6 +23,9 @@ public class OtpService
         _email = _fluentEmail;
     }
 
+    #region GetSixDigitRandomNumber
+
+    #endregion
     public string GetSixDigitRandomNumber()
     {
         Random r = new();
