@@ -16,12 +16,7 @@ public class OtpService
         var serviceCollection = new ServiceCollection();
         serviceCollection
             .AddFluentEmail("lth1212001@gmail.com")
-            .AddSmtpSender(
-                "smtp.gmail.com",
-                587,
-                "lth1212001@gmail.com",
-                "evzd omax jylb pdzn"
-            );
+            .AddSmtpSender("smtp.gmail.com", 587, "lth1212001@gmail.com", "evzd omax jylb pdzn");
         var sericeProvider = serviceCollection.BuildServiceProvider();
         var _fluentEmail = sericeProvider.GetRequiredService<IFluentEmail>();
 
@@ -35,7 +30,12 @@ public class OtpService
         return randNum.ToString();
     }
 
-    public async Task<string> SendOtpViaEmailAsync(string userId, string otpValue, string toEmail, string subject)
+    public async Task<string> SendOtpViaEmailAsync(
+        string userId,
+        string otpValue,
+        string toEmail,
+        string subject
+    )
     {
         var otp = new TblOtp()
         {
@@ -43,7 +43,7 @@ public class OtpService
             OtpValue = Convert.ToInt32(otpValue),
             CreatedAt = DateTime.Now,
             UserId = userId,
-            IsDeleted = false
+            IsDeleted = false,
         };
         await _context.TblOtps.AddAsync(otp);
         await _context.SaveChangesAsync();
