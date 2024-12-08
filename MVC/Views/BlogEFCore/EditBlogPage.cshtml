@@ -1,0 +1,30 @@
+﻿
+@{
+	ViewData["Title"] = "Edit Blog Page";
+}
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Edit Blog</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/BlogEFCore/UpdateAsync?id=@Model.BlogId" method="post">
+                        <label for="UserName">Blog Title</label>
+                        <input type="text" class="form-control" name="BlogTitle" value="@Model.BlogTitle" required />
+                        <br />
+                        <label for="UserName">Blog Author</label>
+                        <input type="text" class="form-control" name="BlogAuthor" value="@Model.BlogAuthor" required />
+                        <br />
+                        <label for="UserName">Blog Content</label>
+                        <input type="text" class="form-control" name="BlogContent" value="@Model.BlogContent" required />
+                        <br />
+                        <button class="btn btn-outline-primary float-end">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

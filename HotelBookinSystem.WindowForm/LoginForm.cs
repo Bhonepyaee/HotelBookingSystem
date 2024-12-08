@@ -86,6 +86,9 @@ public partial class LoginForm : Form
                     MessageBoxIcon.Information
                 );
             }
+            MenuForm menuForm = new();
+            menuForm.Show();
+            this.Hide();
         }
         catch (Exception ex)
         {

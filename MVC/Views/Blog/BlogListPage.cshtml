@@ -8,11 +8,11 @@
 }
 @if(success is not null)
 {
-	<div class="alert alert-success">@success</div>
+	<div class="alert alert-success" role="alert">@success</div>
 }
 @if (fail is not null)
 {
-	<div class="alert alert-danger">@fail</div>
+	<div class="alert alert-danger" role="alert">@fail</div>
 }
 <a class="btn btn-outline-dark" href="/Blog/CreateBlogPage">Create New Blog</a>
 
@@ -36,8 +36,8 @@
 				<td>@item.BlogAuthor</td>
 				<td>@item.BlogContent</td>
 				<td>
-					<a class="btn btn-outline-success" href="">Edith</a>
-					<a class="btn btn-outline-danger" href="">Delete</a>
+					<a class="btn btn-outline-success" href="/Blog/EditBlogPage?id=@item.BlogId">Edith</a>
+					<a class="btn btn-outline-danger" href="/Blog/DeleteBlogAsync?id=@item.BlogId">Delete</a>
 				</td>
 			</tr>
 		}

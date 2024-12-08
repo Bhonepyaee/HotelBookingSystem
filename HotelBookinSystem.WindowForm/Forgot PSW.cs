@@ -69,6 +69,11 @@ public partial class Forgot_PSW : Form
         {
             throw new Exception(ex.Message);
         }
+
+        private void Forgot_PSW_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     private string GetSixDigitRandomNumber()

@@ -38,35 +38,33 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(320, 9);
+            label1.Location = new Point(280, 7);
             label1.Name = "label1";
-            label1.Size = new Size(279, 46);
+            label1.Size = new Size(226, 37);
             label1.TabIndex = 0;
             label1.Text = "ForgotPassword";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(414, 127);
-            txtEmail.Margin = new Padding(3, 4, 3, 4);
+            txtEmail.Location = new Point(362, 95);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(173, 27);
+            txtEmail.Size = new Size(152, 23);
             txtEmail.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(339, 130);
+            label2.Location = new Point(297, 98);
             label2.Name = "label2";
-            label2.Size = new Size(55, 20);
+            label2.Size = new Size(44, 15);
             label2.TabIndex = 2;
             label2.Text = "Gmail :";
             // 
             // btnSend
             // 
-            btnSend.Location = new Point(501, 201);
-            btnSend.Margin = new Padding(3, 4, 3, 4);
+            btnSend.Location = new Point(438, 151);
             btnSend.Name = "btnSend";
-            btnSend.Size = new Size(86, 31);
+            btnSend.Size = new Size(75, 23);
             btnSend.TabIndex = 3;
             btnSend.Text = "Send";
             btnSend.UseVisualStyleBackColor = true;
@@ -74,16 +72,16 @@
             // 
             // Forgot_PSW
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(btnSend);
             Controls.Add(label2);
             Controls.Add(txtEmail);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Forgot_PSW";
             Text = "Forgot_PSW";
+            Load += Forgot_PSW_Load;
             ResumeLayout(false);
             PerformLayout();
         }

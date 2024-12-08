@@ -163,6 +163,7 @@
             button3.Text = "Room";
             button3.TextImageRelation = TextImageRelation.TextBeforeImage;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
             // 
             // button2
             // 
@@ -179,6 +180,7 @@
             button2.Text = "Booking";
             button2.TextImageRelation = TextImageRelation.TextBeforeImage;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -195,6 +197,7 @@
             button1.Text = "Customers";
             button1.TextImageRelation = TextImageRelation.TextBeforeImage;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
             // 
             // panel3
             // 

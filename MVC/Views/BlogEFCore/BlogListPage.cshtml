@@ -1,0 +1,50 @@
+﻿@model List<BlogModel>;
+@{
+	ViewData["Title"] = "Blog List Page";
+	var success = TempData["success"];
+	var fail = TempData["fail"];
+
+}
+
+@if (success is not null)
+{
+    <div class="alert alert-success" role="alert">
+        @success
+    </div>
+}
+
+@if (fail is not null)
+{
+    <div class="alert alert-danger" role="alert">
+        @fail
+    </div>
+}
+
+<a class="btn btn-outline-dark"href="/BlogEFCore/CreateBlogPage">Create New Blog</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Blog Id</th>
+            <th>Blog Title</th>
+            <th>Blog Author</th>
+            <th>Blog Content</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BlogId</td>
+                <td>@item.BlogTitle</td>
+                <td>@item.BlogAuthor</td>
+                <td>@item.BlogContent</td>
+                <td>
+                    <a class="btn btn-outline-success" href="/BlogEFCore/EditBlogPage?id=@item.BlogId">Edit</a>
+                    <a class="btn btn-outline-danger" href="/BlogEFCore/DeleteAsync?id=@item.BlogId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

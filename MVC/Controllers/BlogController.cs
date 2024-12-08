@@ -73,6 +73,84 @@ namespace MVC.Controllers
             }
         }
 
+        [ActionName("EditBlogPage")]
+        [HttpGet]
+        public async Task<IActionResult> EditBlogAsync (int id)
+        {
+            try
+            {
+                string query = BlogQuery.GetBlogByIdQuery;
+                var parameters = new { BlogId = id };
+                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+                var lst = await db.QueryAsync<BlogModel>(query, parameters);
 
+                return View(lst);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [ActionName("UpdateBlogAsync")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateBlogAsync(BlogRequestModel requestModel, int id)
+        {
+            try
+            {
+                string query = BlogQuery.UpdateBlogQuery;
+                var parameters = new
+                {
+                    requestModel.BlogTitle,
+                    requestModel.BlogAuthor,
+                    requestModel.BlogContent,
+                    BlogId = id
+                };
+
+                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+                int result = await db.ExecuteAsync(query, parameters);
+
+                if(result > 0)
+                {
+                    TempData["success"] = "Updating Successful.";
+                }
+                else
+                {
+                    TempData["fail"] = "Updating Fail.";
+
+                }
+
+                return RedirectToAction("BlogListPage");   
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [ActionName("DeleteBlogAsync")]
+        public async Task<IActionResult> DeleteBlogAsync(int id)
+        {
+            string query = BlogQuery.DeleteBlogQuery;
+            var parameters = new
+            {
+                BlogId = id
+            };
+
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+
+            int result = await db.ExecuteAsync(query, parameters);
+
+            if (result > 0)
+            {
+                TempData["success"] = "Deleting Successful.";
+            }
+            else
+            {
+                TempData["fail"] = "Deleting Fail.";
+            }
+
+            return RedirectToAction("BlogListPage");
+        }
     }
 }

@@ -51,5 +51,26 @@ namespace HotelBookinSystem.WindowForm
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            CustomerListForm customerListForm = new CustomerListForm();
+            customerListForm.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BookingListForm bookingListForm = new BookingListForm();
+            bookingListForm.Show();
+            this.Hide();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            RoomListForm roomListForm = new RoomListForm();
+            roomListForm.Show();
+            this.Hide();
+        }
     }
 }
