@@ -22,12 +22,12 @@ public class BlogController : Controller
         try
         {
             string query = BlogQuery.BlogListQuery;
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection")); 
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
             var lst = await db.QueryAsync<BlogModel>(query);
 
             return View(lst.ToList());
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
@@ -67,7 +67,7 @@ public class BlogController : Controller
 
             return RedirectToAction("BlogListPage");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
@@ -75,7 +75,7 @@ public class BlogController : Controller
 
     [ActionName("EditBlogPage")]
     [HttpGet]
-    public async Task<IActionResult> EditBlogAsync (int id)
+    public async Task<IActionResult> EditBlogAsync(int id)
     {
         try
         {
@@ -86,7 +86,7 @@ public class BlogController : Controller
 
             return View(lst);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
@@ -110,7 +110,7 @@ public class BlogController : Controller
             using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
             int result = await db.ExecuteAsync(query, parameters);
 
-            if(result > 0)
+            if (result > 0)
             {
                 TempData["success"] = "Updating Successful.";
             }
@@ -120,9 +120,9 @@ public class BlogController : Controller
 
             }
 
-            return RedirectToAction("BlogListPage");   
+            return RedirectToAction("BlogListPage");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
