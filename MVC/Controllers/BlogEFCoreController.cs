@@ -63,7 +63,7 @@ public class BlogEFCoreController : Controller
 
             return RedirectToAction("BlogListPage");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
@@ -94,7 +94,7 @@ public class BlogEFCoreController : Controller
 
     [ActionName("UpdateAsync")]
     [HttpPost]
-    public async Task<IActionResult> UpdateAsync(int id,BlogRequestModel requestModel)
+    public async Task<IActionResult> UpdateAsync(int id, BlogRequestModel requestModel)
     {
         try
         {
@@ -106,7 +106,7 @@ public class BlogEFCoreController : Controller
 
             int result = await _context.SaveChangesAsync();
 
-            if(result == 1)
+            if (result == 1)
             {
                 TempData["success"] = "Updating successful.";
             }
@@ -135,7 +135,7 @@ public class BlogEFCoreController : Controller
 
             int result = await _context.SaveChangesAsync();
 
-            if(result > 0)
+            if (result > 0)
             {
                 TempData["success"] = "Deleting Successful.";
             }
@@ -146,7 +146,7 @@ public class BlogEFCoreController : Controller
 
             return RedirectToAction("BlogListPage");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
