@@ -9,14 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HotelBookinSystem.WindowForm.Config;
+using HotelBookinSystem.WindowForm.Services;
 
 namespace HotelBookinSystem.WindowForm
 {
     public partial class BookingForm : Form
     {
+        internal readonly AdoDotNetService _service;
         public BookingForm()
         {
             InitializeComponent();
+            _service = new();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -44,22 +47,23 @@ namespace HotelBookinSystem.WindowForm
                 string checkOutDate = txtCheckOutDate.Text;
                 string bookingDate = txtBookingDate.Text;
                 string status = txtStatus.Text;
-                string checkRoom = "SELECT Availability FROM Room_Table WHERE RoomId = @RoomId";
 
-                
-                SqlConnection connection = new(DbConfig._connectionString);
-                await connection.OpenAsync();
-                SqlCommand command = new(checkRoom,connection);
-                command.Parameters.AddWithValue("@RoomId",roomId);
-                SqlDataAdapter adapter = new(command);
-                DataTable dt = new();
-                adapter.Fill(dt);
-                await connection.CloseAsync();
+                #region Check Room Available
 
-                if(dt.Rows.Count == 0)
+                string checkRoomAvailableQuery = "SELECT Availability FROM Room_Table WHERE RoomId = @RoomId";
+                var checkRoomAvailableParameters = new[]
+                {
+                    new SqlParameter("@RoomId", roomId)
+                };
+                var checkRoomAvailableDt = await _service.QueryFirstOrDefaultAsync(checkRoomAvailableQuery, checkRoomAvailableParameters);
+
+                if (checkRoomAvailableDt.Rows.Count == 0)
                 {
                     MessageBox.Show("Room is not available for booking now", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                #endregion
 
                 string query =
                  @"INSERT INTO Booking_Table(CustomerId, RoomId, CheckInDate, CheckOutDate, BookingDate, Status)
@@ -75,20 +79,20 @@ namespace HotelBookinSystem.WindowForm
                     new("@Status",status)
                 };
 
-               string updateRoomQuery = "UPDATE Room_Table SET Availability = 0 WHERE RoomId = @RoomId";
+                string updateRoomQuery = "UPDATE Room_Table SET Availability = 0 WHERE RoomId = @RoomId";
                 SqlConnection connection2 = new SqlConnection(DbConfig._connectionString);
                 await connection2.OpenAsync();
 
                 SqlCommand command2 = new(updateRoomQuery, connection2);
-                command2.Parameters.AddWithValue("@Availability",0);
+                command2.Parameters.AddWithValue("@Availability", 0);
                 int result = await command2.ExecuteNonQueryAsync();
-                if(result == 1)
+                if (result == 1)
                 {
                     MessageBox.Show("");
                 }
 
                 await connection2.CloseAsync();
-               
+
 
                 SqlConnection connection1 = new SqlConnection(DbConfig._connectionString);
                 await connection1.OpenAsync();
@@ -99,20 +103,20 @@ namespace HotelBookinSystem.WindowForm
                 int result1 = await command1.ExecuteNonQueryAsync();
                 await connection1.CloseAsync();
 
-                if(result1 == 1)
+                if (result1 == 1)
                 {
-                    MessageBox.Show("Saving Successful.","Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Saving Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     BookingListForm bookingListForm = new BookingListForm();
                     bookingListForm.Show();
                     this.Hide();
                     return;
                 }
-                   MessageBox.Show(
-                     "Saving Fail.",
-                      "Fail",
-                     MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Error);
+                MessageBox.Show(
+                  "Saving Fail.",
+                   "Fail",
+                  MessageBoxButtons.OKCancel,
+                 MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
