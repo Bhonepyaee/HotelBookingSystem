@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using MVC;
-using MVC.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 
