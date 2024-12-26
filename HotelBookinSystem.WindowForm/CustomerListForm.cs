@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using HotelBookinSystem.WindowForm.Config;
 using HotelBookinSystem.WindowForm.Query;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace HotelBookinSystem.WindowForm
 {
