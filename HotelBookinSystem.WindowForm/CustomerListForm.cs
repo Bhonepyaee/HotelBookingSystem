@@ -13,7 +13,6 @@ public partial class CustomerListForm : Form
     }
 
 
-
     private async void label1_Click(object sender, EventArgs e)
     {
 
