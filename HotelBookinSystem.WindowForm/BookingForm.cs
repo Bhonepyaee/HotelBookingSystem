@@ -92,32 +92,23 @@ namespace HotelBookinSystem.WindowForm
 
                 #region Update Availability
 
-                #endregion
                 string updateRoomQuery = "UPDATE Room_Table SET Availability = 0 WHERE RoomId = @RoomId";
-                SqlConnection connection2 = new SqlConnection(DbConfig._connectionString);
-                await connection2.OpenAsync();
-
-                SqlCommand command2 = new(updateRoomQuery, connection2);
-                command2.Parameters.AddWithValue("@Availability", 0);
-                int result = await command2.ExecuteNonQueryAsync();
-                if (result == 1)
+                List<SqlParameter> updateRoomParameters = new()
                 {
-                    MessageBox.Show("");
+                    new("@RoomId", roomId),
+                    new("@Availability", 0)
+                };
+                int updateRoomResult = await _service.ExecuteAsync(updateRoomQuery, updateRoomParameters.ToArray());
+
+                if (updateRoomResult <= 0)
+                {
+                    MessageBox.Show("Booking Fail.");
+                    return;
                 }
 
-                await connection2.CloseAsync();
+                #endregion
 
-
-                SqlConnection connection1 = new SqlConnection(DbConfig._connectionString);
-                await connection1.OpenAsync();
-
-                SqlCommand command1 = new SqlCommand(query, connection1);
-                command1.Parameters.AddRange(parameters.ToArray());
-
-                int result1 = await command1.ExecuteNonQueryAsync();
-                await connection1.CloseAsync();
-
-                if (result1 == 1)
+                if (createBookingResult > 1 && updateRoomResult > 1)
                 {
                     MessageBox.Show("Saving Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -126,6 +117,7 @@ namespace HotelBookinSystem.WindowForm
                     this.Hide();
                     return;
                 }
+
                 MessageBox.Show(
                   "Saving Fail.",
                    "Fail",
