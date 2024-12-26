@@ -23,7 +23,7 @@ public partial class UpdateCustomerForm : Form
         _email = email;
         _address = address;
         _customerId = customerId;
-      
+
     }
 
     private void UpdateCustomerForm_Load(object sender, EventArgs e)
@@ -51,7 +51,7 @@ public partial class UpdateCustomerForm : Form
             string phoneNo = txtPhoneNo.Text;
             string email = txtEmail.Text;
             string address = txtAddress.Text;
-           
+
 
             string query = CustomerQuery.UpdateCustomerQuery;
             List<SqlParameter> parameters = new()
@@ -62,7 +62,7 @@ public partial class UpdateCustomerForm : Form
                 new("@Phone",phoneNo),
                 new("@Email",email),
                 new("@Address",address),
-               
+
             };
 
             SqlConnection connection = new SqlConnection(DbConfig._connectionString);
@@ -97,7 +97,7 @@ public partial class UpdateCustomerForm : Form
                 MessageBoxIcon.Error
             );
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
