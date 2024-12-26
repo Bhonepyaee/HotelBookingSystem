@@ -65,6 +65,8 @@ namespace HotelBookinSystem.WindowForm
 
                 #endregion
 
+                #region Book
+
                 string query =
                  @"INSERT INTO Booking_Table(CustomerId, RoomId, CheckInDate, CheckOutDate, BookingDate, Status)
                     VALUES(@CustomerId, @RoomId, @CheckInDate, @CheckOutDate, @BookingDate, @Status)";
@@ -78,6 +80,14 @@ namespace HotelBookinSystem.WindowForm
                     new("@BookingDate",bookingDate),
                     new("@Status",status)
                 };
+                int createBookingResult = await _service.ExecuteAsync(query, parameters.ToArray());
+                if (createBookingResult <= 0)
+                {
+                    MessageBox.Show("Creating Booking Fail.");
+                    return;
+                }
+
+                #endregion
 
                 string updateRoomQuery = "UPDATE Room_Table SET Availability = 0 WHERE RoomId = @RoomId";
                 SqlConnection connection2 = new SqlConnection(DbConfig._connectionString);
