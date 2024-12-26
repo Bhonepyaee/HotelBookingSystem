@@ -81,6 +81,7 @@ namespace HotelBookinSystem.WindowForm
                     new("@Status",status)
                 };
                 int createBookingResult = await _service.ExecuteAsync(query, parameters.ToArray());
+
                 if (createBookingResult <= 0)
                 {
                     MessageBox.Show("Creating Booking Fail.");
@@ -89,6 +90,9 @@ namespace HotelBookinSystem.WindowForm
 
                 #endregion
 
+                #region Update Availability
+
+                #endregion
                 string updateRoomQuery = "UPDATE Room_Table SET Availability = 0 WHERE RoomId = @RoomId";
                 SqlConnection connection2 = new SqlConnection(DbConfig._connectionString);
                 await connection2.OpenAsync();
