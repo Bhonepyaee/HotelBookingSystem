@@ -2,105 +2,104 @@
 using HotelBookinSystem.WindowForm.Config;
 using HotelBookinSystem.WindowForm.Query;
 
-namespace HotelBookinSystem.WindowForm
+namespace HotelBookinSystem.WindowForm;
+
+public partial class UpdateCustomerForm : Form
 {
-    public partial class UpdateCustomerForm : Form
+    private readonly int _customerId;
+    private readonly string _firstName = string.Empty;
+    private readonly string _lastName = string.Empty;
+    private readonly string _phoneNo = string.Empty;
+    private readonly string _email = string.Empty;
+    private readonly string _address = string.Empty;
+    private readonly string _dateOfBirth = string.Empty;
+
+    public UpdateCustomerForm(int customerId, string firstName, string lastName, string phoneNo, string email, string address)
     {
-        private readonly int _customerId;
-        private readonly string _firstName = string.Empty;
-        private readonly string _lastName = string.Empty;
-        private readonly string _phoneNo = string.Empty;
-        private readonly string _email = string.Empty;
-        private readonly string _address = string.Empty;
-        private readonly string _dateOfBirth = string.Empty;
+        InitializeComponent();
+        _firstName = firstName;
+        _lastName = lastName;
+        _phoneNo = phoneNo;
+        _email = email;
+        _address = address;
+        _customerId = customerId;
+      
+    }
 
-        public UpdateCustomerForm(int customerId, string firstName, string lastName, string phoneNo, string email, string address)
-        {
-            InitializeComponent();
-            _firstName = firstName;
-            _lastName = lastName;
-            _phoneNo = phoneNo;
-            _email = email;
-            _address = address;
-            _customerId = customerId;
-          
-        }
+    private void UpdateCustomerForm_Load(object sender, EventArgs e)
+    {
+        txtFirstName.Text = _firstName;
+        txtLastName.Text = _lastName;
+        txtPhoneNo.Text = _phoneNo;
+        txtEmail.Text = _email;
+        txtAddress.Text = _address;
+    }
 
-        private void UpdateCustomerForm_Load(object sender, EventArgs e)
-        {
-            txtFirstName.Text = _firstName;
-            txtLastName.Text = _lastName;
-            txtPhoneNo.Text = _phoneNo;
-            txtEmail.Text = _email;
-            txtAddress.Text = _address;
-        }
+    private void button2_Click(object sender, EventArgs e)
+    {
+        CustomerListForm customerListForm = new CustomerListForm();
+        customerListForm.Show();
+        this.Hide();
+    }
 
-        private void button2_Click(object sender, EventArgs e)
+    private async void button1_Click(object sender, EventArgs e)
+    {
+        try
         {
-            CustomerListForm customerListForm = new CustomerListForm();
-            customerListForm.Show();
-            this.Hide();
-        }
+            string firstName = txtFirstName.Text;
+            string lastName = txtLastName.Text;
+            string phoneNo = txtPhoneNo.Text;
+            string email = txtEmail.Text;
+            string address = txtAddress.Text;
+           
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            try
+            string query = CustomerQuery.UpdateCustomerQuery;
+            List<SqlParameter> parameters = new()
             {
-                string firstName = txtFirstName.Text;
-                string lastName = txtLastName.Text;
-                string phoneNo = txtPhoneNo.Text;
-                string email = txtEmail.Text;
-                string address = txtAddress.Text;
+                new("@CustomerId",_customerId),
+                new("@FirstName",firstName),
+                new("@LastName",lastName),
+                new("@Phone",phoneNo),
+                new("@Email",email),
+                new("@Address",address),
                
+            };
 
-                string query = CustomerQuery.UpdateCustomerQuery;
-                List<SqlParameter> parameters = new()
-                {
-                    new("@CustomerId",_customerId),
-                    new("@FirstName",firstName),
-                    new("@LastName",lastName),
-                    new("@Phone",phoneNo),
-                    new("@Email",email),
-                    new("@Address",address),
-                   
-                };
+            SqlConnection connection = new SqlConnection(DbConfig._connectionString);
+            await connection.OpenAsync();
 
-                SqlConnection connection = new SqlConnection(DbConfig._connectionString);
-                await connection.OpenAsync();
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddRange(parameters.ToArray());
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddRange(parameters.ToArray());
+            int result = await command.ExecuteNonQueryAsync();
+            await connection.CloseAsync();
 
-                int result = await command.ExecuteNonQueryAsync();
-                await connection.CloseAsync();
-
-                if (result > 0)
-                {
-                    MessageBox.Show(
-                        "Saving Successful.",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-
-                    CustomerListForm customerListForm = new();
-                    customerListForm.Show();
-                    this.Hide();
-
-                    return;
-                }
-
-                MessageBox.Show(
-                    "Saving Fail.",
-                    "Fail",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Error
-                );
-            }
-            catch(Exception ex)
+            if (result > 0)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(
+                    "Saving Successful.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                CustomerListForm customerListForm = new();
+                customerListForm.Show();
+                this.Hide();
+
+                return;
             }
+
+            MessageBox.Show(
+                "Saving Fail.",
+                "Fail",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Error
+            );
+        }
+        catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }
