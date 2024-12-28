@@ -1,6 +1,4 @@
-﻿global using HotelBookinSystem.WindowForm.Services;
-
-namespace HotelBookinSystem.WindowForm;
+﻿namespace HotelBookinSystem.WindowForm;
 
 public partial class BookingForm : Form
 {
