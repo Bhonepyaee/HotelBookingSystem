@@ -1,7 +1,4 @@
-﻿using System.Data.SqlClient;
-using HotelBookinSystem.WindowForm.Config;
-
-namespace HotelBookinSystem.WindowForm;
+﻿namespace HotelBookinSystem.WindowForm;
 
 public partial class CreatCustomerForm : Form
 {
