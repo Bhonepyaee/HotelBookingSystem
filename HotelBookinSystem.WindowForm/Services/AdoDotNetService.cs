@@ -1,6 +1,6 @@
-﻿using HotelBookinSystem.WindowForm.Config;
-using System.Data;
-using System.Data.SqlClient;
+﻿global using HotelBookinSystem.WindowForm.Config;
+global using System.Data;
+global using System.Data.SqlClient;
 
 namespace HotelBookinSystem.WindowForm.Services;
 
