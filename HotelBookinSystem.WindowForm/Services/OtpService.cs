@@ -1,6 +1,6 @@
-﻿using FluentEmail.Core;
-using HotelBookinSystem.WindowForm.AppDbContextModels;
-using Microsoft.Extensions.DependencyInjection;
+﻿global using FluentEmail.Core;
+global using HotelBookinSystem.WindowForm.AppDbContextModels;
+global using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelBookinSystem.WindowForm.Services;
 
