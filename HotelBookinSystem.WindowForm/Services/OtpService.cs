@@ -1,8 +1,4 @@
-﻿global using FluentEmail.Core;
-global using HotelBookinSystem.WindowForm.AppDbContextModels;
-global using Microsoft.Extensions.DependencyInjection;
-
-namespace HotelBookinSystem.WindowForm.Services;
+﻿namespace HotelBookinSystem.WindowForm.Services;
 
 public class OtpService
 {
