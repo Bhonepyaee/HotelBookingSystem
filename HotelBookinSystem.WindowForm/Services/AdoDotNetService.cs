@@ -1,8 +1,4 @@
-﻿global using HotelBookinSystem.WindowForm.Config;
-global using System.Data;
-global using System.Data.SqlClient;
-
-namespace HotelBookinSystem.WindowForm.Services;
+﻿namespace HotelBookinSystem.WindowForm.Services;
 
 public class AdoDotNetService
 {
