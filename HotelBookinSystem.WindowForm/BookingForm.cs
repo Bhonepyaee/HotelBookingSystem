@@ -32,7 +32,7 @@ public partial class BookingForm : Form
         try
         {
             string customerId = txtCustomerId.Text;
-            string roomId = txtRoomId.Text;
+            int roomId = Convert.ToInt32(txtRoomId.Text) ;
             string checkInDate = txtCheckInDate.Text;
             string checkOutDate = txtCheckOutDate.Text;
             string bookingDate = txtBookingDate.Text;
@@ -47,7 +47,7 @@ public partial class BookingForm : Form
             };
             var checkRoomAvailableDt = await _service.QueryFirstOrDefaultAsync(checkRoomAvailableQuery, checkRoomAvailableParameters);
 
-            if (checkRoomAvailableDt.Rows.Count == 0)
+            if (checkRoomAvailableDt.Rows.Count > 0)
             {
                 MessageBox.Show("Room is not available for booking now", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 return;
@@ -82,11 +82,11 @@ public partial class BookingForm : Form
 
             #region Update Availability
 
-            string updateRoomQuery = "UPDATE Room_Table SET Availability = 0 WHERE RoomId = @RoomId";
+            string updateRoomQuery = "UPDATE Room_Table SET Availability = @Availability WHERE RoomId = @RoomId";
             List<SqlParameter> updateRoomParameters = new()
             {
                 new("@RoomId", roomId),
-                new("@Availability", 0)
+                new("@Availability", false)
             };
             int updateRoomResult = await _service.ExecuteAsync(updateRoomQuery, updateRoomParameters.ToArray());
 
@@ -98,7 +98,7 @@ public partial class BookingForm : Form
 
             #endregion
 
-            if (createBookingResult > 1 && updateRoomResult > 1)
+            if (createBookingResult >= 1 && updateRoomResult >= 1)
             {
                 MessageBox.Show("Saving Successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

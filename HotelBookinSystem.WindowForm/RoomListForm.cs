@@ -41,4 +41,11 @@ public partial class RoomListForm : Form
         roomForm.Show();
         this.Hide();
     }
+
+    private void BtnBack_Click(object sender, EventArgs e)
+    {
+        MenuForm menuForm = new MenuForm();
+        menuForm.Show();
+        this.Hide();
+    }
 }

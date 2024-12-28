@@ -87,6 +87,7 @@
             BtnBack.TabIndex = 11;
             BtnBack.Text = "Back";
             BtnBack.UseVisualStyleBackColor = false;
+            BtnBack.Click += BtnBack_Click;
             // 
             // btn_create
             // 

@@ -15,19 +15,41 @@ public class BlogEFCoreController : Controller
     }
 
     [ActionName("BlogListPage")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int pageNo = 1, int pageSize = 10)
     {
-        var blogLst = await _context.Tbl_Blogs.AsNoTracking().ToListAsync();
-        var lst = blogLst.Select(x => new BlogModel()
+        try
         {
-            BlogId = x.BlogId,
-            BlogTitle = x.BlogTitle,
-            BlogAuthor = x.BlogAuthor,
-            BlogContent = x.BlogContent
-        })
-            .ToList();
+            var query = _context.Tbl_Blogs.AsNoTracking();
 
-        return View(lst);
+
+            var blogLst = await query.Skip((pageNo - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            int rowCount = await query.CountAsync();
+            int pageCount = rowCount / pageSize;
+            if(rowCount % pageSize > 0)
+            {
+                pageCount++;
+            }
+            PageSettingModel pageSetting = new(pageNo, pageSize, pageCount, rowCount, "/BlogEFCore/BlogListPage");
+
+            var model = new BlogListResponseModel()
+            {
+                Blogs = blogLst.Select(x => new BlogModel()
+                {
+                    BlogId = x.BlogId,
+                    BlogTitle = x.BlogTitle,
+                    BlogAuthor = x.BlogAuthor,
+                    BlogContent = x.BlogContent
+                }).ToList(),
+                PageSetting = pageSetting,
+            };
+        
+            return View(model);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     [ActionName("CreateBlogPage")]

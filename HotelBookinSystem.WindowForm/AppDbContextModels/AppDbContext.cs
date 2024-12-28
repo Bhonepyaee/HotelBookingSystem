@@ -17,7 +17,7 @@ public partial class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
         optionsBuilder.UseSqlServer(
-            "Server=.;Database=BhonePyae;User ID=sa;Password=sasa@123;TrustServerCertificate=True;"
+            "Server=.;Database=HotelBookingSystem;User ID=sa;Password=sasa@123;TrustServerCertificate=True;"
         );
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
