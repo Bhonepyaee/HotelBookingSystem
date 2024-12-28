@@ -1,7 +1,4 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using HotelBookinSystem.WindowForm.Config;
-using HotelBookinSystem.WindowForm.Query;
+﻿using HotelBookinSystem.WindowForm.Query;
 
 namespace HotelBookinSystem.WindowForm;
 
