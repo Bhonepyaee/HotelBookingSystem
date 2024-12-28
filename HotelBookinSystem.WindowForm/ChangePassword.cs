@@ -1,7 +1,4 @@
-﻿global using HotelBookinSystem.WindowForm.Exrtensions;
-global using Microsoft.EntityFrameworkCore;
-
-namespace HotelBookinSystem.WindowForm;
+﻿namespace HotelBookinSystem.WindowForm;
 
 public partial class ChangePassword : Form
 {
