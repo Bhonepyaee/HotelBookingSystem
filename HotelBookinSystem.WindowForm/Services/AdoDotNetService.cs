@@ -96,7 +96,6 @@ public class AdoDotNetService
         }
     }
 
-
     public async Task<int> ExecuteAsync(string query, SqlParameter[] parameters)
     {
         try
