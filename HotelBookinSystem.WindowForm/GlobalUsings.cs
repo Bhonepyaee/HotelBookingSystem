@@ -6,3 +6,4 @@ global using FluentEmail.Core;
 global using HotelBookinSystem.WindowForm.AppDbContextModels;
 global using Microsoft.Extensions.DependencyInjection;
 global using HotelBookinSystem.WindowForm.Services;
+global using HotelBookinSystem.WindowForm.Query;

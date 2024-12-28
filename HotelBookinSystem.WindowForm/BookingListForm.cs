@@ -1,6 +1,4 @@
-﻿global using HotelBookinSystem.WindowForm.Query;
-
-namespace HotelBookinSystem.WindowForm;
+﻿namespace HotelBookinSystem.WindowForm;
 
 public partial class BookingListForm : Form
 {
