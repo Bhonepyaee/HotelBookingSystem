@@ -1,4 +1,4 @@
-using HotelBookinSystem.WindowForm.Models;
+global using HotelBookinSystem.WindowForm.Models;
 
 namespace HotelBookinSystem.WindowForm;
 
