@@ -1,58 +1,57 @@
 ﻿using HotelBookinSystem.WindowForm.Exrtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace HotelBookinSystem.WindowForm
+namespace HotelBookinSystem.WindowForm;
+
+public partial class ChangePassword : Form
 {
-    public partial class ChangePassword : Form
+    internal readonly string _email;
+    internal readonly string _userId;
+    internal readonly AppDbContext _context;
+
+    public ChangePassword(string email, string userId)
     {
-        internal readonly string _email;
-        internal readonly string _userId;
-        internal readonly AppDbContext _context;
+        InitializeComponent();
+        _email = email;
+        _userId = userId;
+        _context = Program.ServiceProvider.GetRequiredService<AppDbContext>();
+    }
 
-        public ChangePassword(string email, string userId)
+    private void ChangePassword_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private async void button1_Click(object sender, EventArgs e)
+    {
+        try
         {
-            InitializeComponent();
-            _email = email;
-            _userId = userId;
-            _context = Program.ServiceProvider.GetRequiredService<AppDbContext>();
-        }
+            string newPassword = txtNewPassword.Text;
+            string confirmPassword = txtConfirmPassword.Text;
 
-        private void ChangePassword_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            try
+            if (!newPassword.IsNullOrEmpty() && !confirmPassword.IsNullOrEmpty())
             {
-                string newPassword = txtNewPassword.Text;
-                string confirmPassword = txtConfirmPassword.Text;
-
-                if (!newPassword.IsNullOrEmpty() && !confirmPassword.IsNullOrEmpty())
+                if (!newPassword.Equals(confirmPassword))
                 {
-                    if (!newPassword.Equals(confirmPassword))
-                    {
-                        MessageBox.Show("Error", "Passwords must be the same.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    var user = await _context.TblAdmins.FirstOrDefaultAsync(x => x.UserId == _userId && x.Email == _email && !x.IsDeleted);
-                    ArgumentNullException.ThrowIfNull(user, nameof(user));
-
-                    user.Password = newPassword;
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-
-                    LoginForm loginForm = new();
-                    loginForm.Show();
-                    this.Hide();
+                    MessageBox.Show("Error", "Passwords must be the same.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                var user = await _context.TblAdmins.FirstOrDefaultAsync(x => x.UserId == _userId && x.Email == _email && !x.IsDeleted);
+                ArgumentNullException.ThrowIfNull(user, nameof(user));
+
+                user.Password = newPassword;
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+
+                LoginForm loginForm = new();
+                loginForm.Show();
+                this.Hide();
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }
