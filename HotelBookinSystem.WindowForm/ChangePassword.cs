@@ -1,5 +1,5 @@
-﻿using HotelBookinSystem.WindowForm.Exrtensions;
-using Microsoft.EntityFrameworkCore;
+﻿global using HotelBookinSystem.WindowForm.Exrtensions;
+global using Microsoft.EntityFrameworkCore;
 
 namespace HotelBookinSystem.WindowForm;
 
