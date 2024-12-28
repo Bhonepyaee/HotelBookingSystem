@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using HotelBookinSystem.WindowForm.Services;
+﻿using HotelBookinSystem.WindowForm.Services;
 
 namespace HotelBookinSystem.WindowForm;
 
