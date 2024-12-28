@@ -9,3 +9,4 @@ global using HotelBookinSystem.WindowForm.Services;
 global using HotelBookinSystem.WindowForm.Query;
 global using HotelBookinSystem.WindowForm.Exrtensions;
 global using Microsoft.EntityFrameworkCore;
+global using HotelBookinSystem.WindowForm.Models;

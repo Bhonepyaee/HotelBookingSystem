@@ -1,5 +1,3 @@
-global using HotelBookinSystem.WindowForm.Models;
-
 namespace HotelBookinSystem.WindowForm;
 
 public partial class LoginForm : Form
