@@ -1,4 +1,4 @@
-﻿using HotelBookinSystem.WindowForm.Services;
+﻿global using HotelBookinSystem.WindowForm.Services;
 
 namespace HotelBookinSystem.WindowForm;
 
