@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿global using Newtonsoft.Json;
 
 namespace HotelBookinSystem.WindowForm.Exrtensions;
 
