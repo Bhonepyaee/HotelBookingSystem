@@ -53,9 +53,10 @@
             txtStatus.BackColor = Color.Silver;
             txtStatus.BorderStyle = BorderStyle.None;
             txtStatus.ForeColor = Color.Transparent;
-            txtStatus.Location = new Point(416, 336);
+            txtStatus.Location = new Point(475, 448);
+            txtStatus.Margin = new Padding(3, 4, 3, 4);
             txtStatus.Name = "txtStatus";
-            txtStatus.Size = new Size(103, 16);
+            txtStatus.Size = new Size(118, 20);
             txtStatus.TabIndex = 47;
             // 
             // label7
@@ -63,9 +64,9 @@
             label7.AutoSize = true;
             label7.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = SystemColors.ControlDark;
-            label7.Location = new Point(327, 336);
+            label7.Location = new Point(374, 448);
             label7.Name = "label7";
-            label7.Size = new Size(44, 16);
+            label7.Size = new Size(57, 20);
             label7.TabIndex = 46;
             label7.Text = "Status";
             // 
@@ -73,9 +74,10 @@
             // 
             button2.Image = (Image)resources.GetObject("button2.Image");
             button2.ImageAlign = ContentAlignment.MiddleRight;
-            button2.Location = new Point(43, 60);
+            button2.Location = new Point(49, 80);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(118, 29);
+            button2.Size = new Size(135, 39);
             button2.TabIndex = 45;
             button2.Text = "Back";
             button2.UseVisualStyleBackColor = true;
@@ -84,9 +86,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(237, 60);
+            pictureBox1.Location = new Point(271, 80);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(46, 31);
+            pictureBox1.Size = new Size(53, 41);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 44;
             pictureBox1.TabStop = false;
@@ -95,9 +98,10 @@
             // 
             button1.Image = (Image)resources.GetObject("button1.Image");
             button1.ImageAlign = ContentAlignment.MiddleRight;
-            button1.Location = new Point(651, 395);
+            button1.Location = new Point(744, 527);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(118, 29);
+            button1.Size = new Size(135, 39);
             button1.TabIndex = 43;
             button1.Text = "Confirm";
             button1.UseVisualStyleBackColor = true;
@@ -108,9 +112,10 @@
             txtBookingDate.BackColor = Color.Silver;
             txtBookingDate.BorderStyle = BorderStyle.None;
             txtBookingDate.ForeColor = Color.Transparent;
-            txtBookingDate.Location = new Point(416, 302);
+            txtBookingDate.Location = new Point(475, 403);
+            txtBookingDate.Margin = new Padding(3, 4, 3, 4);
             txtBookingDate.Name = "txtBookingDate";
-            txtBookingDate.Size = new Size(103, 16);
+            txtBookingDate.Size = new Size(118, 20);
             txtBookingDate.TabIndex = 42;
             // 
             // label6
@@ -118,9 +123,9 @@
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = SystemColors.ControlDark;
-            label6.Location = new Point(313, 302);
+            label6.Location = new Point(358, 403);
             label6.Name = "label6";
-            label6.Size = new Size(86, 16);
+            label6.Size = new Size(105, 20);
             label6.TabIndex = 41;
             label6.Text = "BookingDate";
             // 
@@ -129,9 +134,10 @@
             txtCheckOutDate.BackColor = Color.Silver;
             txtCheckOutDate.BorderStyle = BorderStyle.None;
             txtCheckOutDate.ForeColor = Color.Black;
-            txtCheckOutDate.Location = new Point(416, 268);
+            txtCheckOutDate.Location = new Point(475, 357);
+            txtCheckOutDate.Margin = new Padding(3, 4, 3, 4);
             txtCheckOutDate.Name = "txtCheckOutDate";
-            txtCheckOutDate.Size = new Size(103, 16);
+            txtCheckOutDate.Size = new Size(118, 20);
             txtCheckOutDate.TabIndex = 40;
             // 
             // label5
@@ -139,9 +145,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = SystemColors.ControlDark;
-            label5.Location = new Point(307, 268);
+            label5.Location = new Point(351, 357);
             label5.Name = "label5";
-            label5.Size = new Size(94, 16);
+            label5.Size = new Size(119, 20);
             label5.TabIndex = 39;
             label5.Text = "CheckOutDate";
             // 
@@ -150,9 +156,10 @@
             txtCheckInDate.BackColor = Color.Silver;
             txtCheckInDate.BorderStyle = BorderStyle.None;
             txtCheckInDate.ForeColor = Color.Black;
-            txtCheckInDate.Location = new Point(416, 232);
+            txtCheckInDate.Location = new Point(475, 309);
+            txtCheckInDate.Margin = new Padding(3, 4, 3, 4);
             txtCheckInDate.Name = "txtCheckInDate";
-            txtCheckInDate.Size = new Size(103, 16);
+            txtCheckInDate.Size = new Size(118, 20);
             txtCheckInDate.TabIndex = 38;
             // 
             // label4
@@ -160,9 +167,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.ControlDark;
-            label4.Location = new Point(311, 231);
+            label4.Location = new Point(355, 308);
             label4.Name = "label4";
-            label4.Size = new Size(84, 16);
+            label4.Size = new Size(105, 20);
             label4.TabIndex = 37;
             label4.Text = "CheckInDate";
             label4.Click += label4_Click;
@@ -172,9 +179,10 @@
             txtRoomId.BackColor = Color.Silver;
             txtRoomId.BorderStyle = BorderStyle.None;
             txtRoomId.ForeColor = Color.Black;
-            txtRoomId.Location = new Point(416, 193);
+            txtRoomId.Location = new Point(475, 257);
+            txtRoomId.Margin = new Padding(3, 4, 3, 4);
             txtRoomId.Name = "txtRoomId";
-            txtRoomId.Size = new Size(103, 16);
+            txtRoomId.Size = new Size(118, 20);
             txtRoomId.TabIndex = 36;
             // 
             // label3
@@ -182,9 +190,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ControlDark;
-            label3.Location = new Point(314, 192);
+            label3.Location = new Point(359, 256);
             label3.Name = "label3";
-            label3.Size = new Size(55, 16);
+            label3.Size = new Size(66, 20);
             label3.TabIndex = 35;
             label3.Text = "RoomId";
             label3.Click += label3_Click;
@@ -194,9 +202,10 @@
             txtCustomerId.BackColor = Color.Silver;
             txtCustomerId.BorderStyle = BorderStyle.None;
             txtCustomerId.ForeColor = Color.Black;
-            txtCustomerId.Location = new Point(416, 157);
+            txtCustomerId.Location = new Point(475, 209);
+            txtCustomerId.Margin = new Padding(3, 4, 3, 4);
             txtCustomerId.Name = "txtCustomerId";
-            txtCustomerId.Size = new Size(103, 16);
+            txtCustomerId.Size = new Size(118, 20);
             txtCustomerId.TabIndex = 34;
             // 
             // label2
@@ -204,9 +213,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.ControlDark;
-            label2.Location = new Point(314, 156);
+            label2.Location = new Point(359, 208);
             label2.Name = "label2";
-            label2.Size = new Size(75, 16);
+            label2.Size = new Size(95, 20);
             label2.TabIndex = 33;
             label2.Text = "CustomerId";
             label2.Click += label2_Click;
@@ -216,18 +225,18 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ActiveCaption;
-            label1.Location = new Point(294, 58);
+            label1.Location = new Point(336, 77);
             label1.Name = "label1";
-            label1.Size = new Size(256, 297);
+            label1.Size = new Size(325, 378);
             label1.TabIndex = 32;
             label1.Text = "Make To Booking\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n";
             // 
             // BookingForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 30, 54);
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(txtStatus);
             Controls.Add(label7);
             Controls.Add(button2);
@@ -244,8 +253,10 @@
             Controls.Add(txtCustomerId);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "BookingForm";
             Text = "BookingForm";
+            Load += BookingForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

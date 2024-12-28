@@ -32,7 +32,7 @@ public partial class BookingForm : Form
         try
         {
             string customerId = txtCustomerId.Text;
-            int roomId = Convert.ToInt32(txtRoomId.Text) ;
+            int roomId = Convert.ToInt32(txtRoomId.Text);
             string checkInDate = txtCheckInDate.Text;
             string checkOutDate = txtCheckOutDate.Text;
             string bookingDate = txtBookingDate.Text;
@@ -125,5 +125,10 @@ public partial class BookingForm : Form
         BookingListForm bookingListForm = new BookingListForm();
         bookingListForm.Show();
         this.Hide();
+    }
+
+    private void BookingForm_Load(object sender, EventArgs e)
+    {
+
     }
 }
