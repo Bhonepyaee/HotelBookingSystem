@@ -1,8 +1,4 @@
-using HotelBookinSystem.WindowForm.AppDbContextModels;
-using HotelBookinSystem.WindowForm.Exrtensions;
 using HotelBookinSystem.WindowForm.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelBookinSystem.WindowForm;
 
