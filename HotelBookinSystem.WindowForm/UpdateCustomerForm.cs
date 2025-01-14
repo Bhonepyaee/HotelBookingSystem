@@ -57,7 +57,6 @@ public partial class UpdateCustomerForm : Form
                 new("@Phone",phoneNo),
                 new("@Email",email),
                 new("@Address",address),
-
             };
 
             SqlConnection connection = new SqlConnection(DbConfig._connectionString);
