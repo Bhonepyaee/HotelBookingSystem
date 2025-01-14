@@ -53,7 +53,7 @@ public class AdoDotNetService
             }
 
             SqlDataAdapter adapter = new(command);
-            DataTable dt = new DataTable();
+            DataTable dt = new();
             adapter.Fill(dt);
 
             await connection.CloseAsync();
