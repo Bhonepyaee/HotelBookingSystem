@@ -52,7 +52,7 @@ public class AdoDotNetService
                 command.Parameters.AddRange(parameters);
             }
 
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            SqlDataAdapter adapter = new(command);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
 
