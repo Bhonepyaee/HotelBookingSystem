@@ -46,7 +46,7 @@ public class AdoDotNetService
             SqlConnection connection = GetSqlConnection();
             await connection.OpenAsync();
 
-            SqlCommand command = new SqlCommand(query, connection) { CommandType = commandType };
+            SqlCommand command = new(query, connection) { CommandType = commandType };
             if (parameters is not null)
             {
                 command.Parameters.AddRange(parameters);
