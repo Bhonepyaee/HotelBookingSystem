@@ -10,7 +10,14 @@ public partial class UpdateCustomerForm : Form
     private readonly string _address = string.Empty;
     private readonly string _dateOfBirth = string.Empty;
 
-    public UpdateCustomerForm(int customerId, string firstName, string lastName, string phoneNo, string email, string address)
+    public UpdateCustomerForm(
+        int customerId,
+        string firstName,
+        string lastName,
+        string phoneNo,
+        string email,
+        string address
+    )
     {
         InitializeComponent();
         _firstName = firstName;
@@ -47,16 +54,15 @@ public partial class UpdateCustomerForm : Form
             string email = txtEmail.Text;
             string address = txtAddress.Text;
 
-
             string query = CustomerQuery.UpdateCustomerQuery;
             List<SqlParameter> parameters = new()
             {
-                new("@CustomerId",_customerId),
-                new("@FirstName",firstName),
-                new("@LastName",lastName),
-                new("@Phone",phoneNo),
-                new("@Email",email),
-                new("@Address",address),
+                new("@CustomerId", _customerId),
+                new("@FirstName", firstName),
+                new("@LastName", lastName),
+                new("@Phone", phoneNo),
+                new("@Email", email),
+                new("@Address", address),
             };
 
             SqlConnection connection = new SqlConnection(DbConfig._connectionString);
