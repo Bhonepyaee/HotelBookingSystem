@@ -19,7 +19,6 @@ public partial class UpdateCustomerForm : Form
         _email = email;
         _address = address;
         _customerId = customerId;
-
     }
 
     private void UpdateCustomerForm_Load(object sender, EventArgs e)
