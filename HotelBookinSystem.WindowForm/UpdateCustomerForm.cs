@@ -68,7 +68,7 @@ public partial class UpdateCustomerForm : Form
             SqlConnection connection = new(DbConfig._connectionString);
             await connection.OpenAsync();
 
-            SqlCommand command = new SqlCommand(query, connection);
+            SqlCommand command = new(query, connection);
             command.Parameters.AddRange(parameters.ToArray());
 
             int result = await command.ExecuteNonQueryAsync();
