@@ -65,7 +65,7 @@ public partial class UpdateCustomerForm : Form
                 new("@Address", address),
             };
 
-            SqlConnection connection = new SqlConnection(DbConfig._connectionString);
+            SqlConnection connection = new(DbConfig._connectionString);
             await connection.OpenAsync();
 
             SqlCommand command = new SqlCommand(query, connection);
