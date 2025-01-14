@@ -11,19 +11,13 @@ public partial class BookingListForm : Form
     {
         try
         {
-            string query = BookingQuery.GetBookingQuery;
+            await LoadData();
 
-            SqlConnection connection = new SqlConnection(DbConfig._connectionString);
-            await connection.OpenAsync();
+            DataGridViewButtonColumn deleteBtn =
+               new() { Text = "Change Status", UseColumnTextForButtonValue = true };
+            deleteBtn.DefaultCellStyle.BackColor = Color.Red;
+            dataGridView1.Columns.Add(deleteBtn);
 
-            SqlCommand command = new SqlCommand(query, connection);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-
-            await connection.CloseAsync();
-            dataGridView1.DataSource = dt;
         }
         catch (Exception ex)
         {
@@ -43,5 +37,51 @@ public partial class BookingListForm : Form
         MenuForm menuForm = new MenuForm();
         menuForm.Show();
         this.Hide();
+    }
+
+    private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+        int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
+
+        if(e.ColumnIndex == 7)
+        {
+            string query = "UPDATE Room_Table SET Availability = 1 WHERE RoomId = @RoomId";
+            SqlParameter parameter = new("@RoomId",id);
+            SqlConnection connection = new SqlConnection(DbConfig._connectionString);
+            await connection.OpenAsync();
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add(parameter);
+
+            int result = await command.ExecuteNonQueryAsync();
+            await connection.CloseAsync();
+
+            if(result == 1)
+            {
+                MessageBox.Show("Room is available","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                await LoadData();
+                return;
+            }
+           
+        }
+    }
+
+    private async Task LoadData()
+    {
+
+        string query = BookingQuery.GetBookingQuery;
+
+        SqlConnection connection = new SqlConnection(DbConfig._connectionString);
+        await connection.OpenAsync();
+
+        SqlCommand command = new SqlCommand(query, connection);
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+        DataTable dt = new DataTable();
+        adapter.Fill(dt);
+
+        await connection.CloseAsync();
+        dataGridView1.DataSource = dt;
     }
 }

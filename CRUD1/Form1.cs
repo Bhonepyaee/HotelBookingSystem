@@ -59,44 +59,46 @@ namespace CRUD1
                 this.Hide();
             }
 
-            if(e.ColumnIndex == 5)
-            {
-                try
-                {
-                    DialogResult dialogResult = MessageBox.Show
-                    ("Are you sure delete it?","Warning",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+            //if(e.ColumnIndex == 5)
+            //{
+            //    try
+            //    {
+            //        DialogResult dialogResult = MessageBox.Show
+            //        ("Are you sure delete it?","Warning",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
 
-                    if(dialogResult == DialogResult.OK)
-                    {
-                        string query =
-                        @"DELETE FROM Tbl_Blog WHERE BlogId = @BlogId";
+            //        if(dialogResult == DialogResult.OK)
+            //        {
+            //            string query =
+            //            @"DELETE FROM Tbl_Blog WHERE BlogId = @BlogId";
 
-                        SqlParameter parameter = new SqlParameter("@BlogId", id);
+            //            SqlParameter parameter = new SqlParameter("@BlogId", id);
 
-                        SqlConnection connection = new SqlConnection(DbConfig._connectionString);
-                        await connection.OpenAsync();
+            //            SqlConnection connection = new SqlConnection(DbConfig._connectionString);
+            //            await connection.OpenAsync();
 
-                        SqlCommand command = new SqlCommand(query, connection);
-                        command.Parameters.Add(parameter);
+            //            SqlCommand command = new SqlCommand(query, connection);
+            //            command.Parameters.Add(parameter);
 
-                        int result = await command.ExecuteNonQueryAsync();
-                        await connection.CloseAsync();
+            //            int result = await command.ExecuteNonQueryAsync();
+            //            await connection.CloseAsync();
 
-                        if(result == 1)
-                        {
-                            MessageBox.Show("Deleting Successful.","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                            await LoadData();
-                            return;
-                        }
-                        MessageBox.Show("Deleting Fail.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                    }
+            //            if(result == 1)
+            //            {
+            //                MessageBox.Show("Deleting Successful.","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            //                await LoadData();
+            //                return;
+            //            }
+            //            MessageBox.Show("Deleting Fail.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            //        }
                    
 
-                }catch(Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
+            //    }catch(Exception ex)
+            //    {
+            //        throw new Exception(ex.Message);
+            //    }
+            //}
+
+
         }
 
         public async Task LoadData()

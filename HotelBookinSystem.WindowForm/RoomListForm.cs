@@ -43,4 +43,9 @@ public partial class RoomListForm : Form
         menuForm.Show();
         this.Hide();
     }
+
+    private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
 }

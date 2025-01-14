@@ -75,6 +75,7 @@
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Size = new Size(801, 419);
             dataGridView1.TabIndex = 8;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // btn_create
             // 
