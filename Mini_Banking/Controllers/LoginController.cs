@@ -14,20 +14,17 @@ public class LoginController : Controller
     [ActionName("Login")]
     public async Task<IActionResult> Index()
     {
-
         #region Index
         try
         {
-
             return View();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
-    
     }
-    #endregion
+        #endregion
 
     [ActionName("Register")]
     public async Task<IActionResult> Index1()
@@ -41,5 +38,4 @@ public class LoginController : Controller
             throw new Exception(ex.Message);
         }
     }
-
 }
