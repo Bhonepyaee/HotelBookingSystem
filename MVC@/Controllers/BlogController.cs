@@ -22,12 +22,14 @@ public class BlogController : Controller
         try
         {
             string query = BlogQuery.BlogListQuery;
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             var lst = await db.QueryAsync<BlogModel>(query);
 
             return View(lst);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
@@ -53,10 +55,12 @@ public class BlogController : Controller
                 requestModel.BlogContent,
             };
 
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             int result = await db.ExecuteAsync(query, parameters);
 
-            if(result == 1)
+            if (result == 1)
             {
                 TempData["success"] = "Saving Successful";
             }
@@ -82,7 +86,9 @@ public class BlogController : Controller
             string query = BlogQuery.GetBlogListQuery;
             var parameters = new { BlogId = id };
 
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             var lst = await db.QueryAsync<BlogModel>(query, parameters);
 
             return View(lst);
@@ -105,10 +111,12 @@ public class BlogController : Controller
                 requestModel.BlogTitle,
                 requestModel.BlogAuthor,
                 requestModel.BlogContent,
-                BlogId = id
+                BlogId = id,
             };
 
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             int result = await db.ExecuteAsync(query, parameters);
 
             if (result > 0)
@@ -137,7 +145,9 @@ public class BlogController : Controller
             string query = @"DELETE Tbl_Blog WHERE BlogId = @BlogId";
             var parameters = new { BlogId = id };
 
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             int result = await db.ExecuteAsync(query, parameters);
 
             if (result > 0)
