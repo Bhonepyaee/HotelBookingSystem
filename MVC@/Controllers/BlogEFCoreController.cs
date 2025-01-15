@@ -3,158 +3,157 @@ using Microsoft.EntityFrameworkCore;
 using MVC_.DB;
 using MVC_.Models;
 
-namespace MVC_.Controllers
+namespace MVC_.Controllers;
+
+public class BlogEFCoreController : Controller
 {
-    public class BlogEFCoreController : Controller
+    public AppDbContext _context;
+
+    public BlogEFCoreController(AppDbContext context)
     {
-        public AppDbContext _context;
+        _context = context;
+    }
 
-        public BlogEFCoreController(AppDbContext context)
+    [ActionName("BlogListPage")]
+    public async Task<IActionResult> Index()
+    {
+        try
         {
-            _context = context;
+            var blogLst = await _context.Tbl_Blogs.AsNoTracking().ToListAsync();
+            var lst = blogLst.Select(x => new BlogModel()
+            {
+                BlogId = x.BlogId,
+                BlogTitle = x.BlogTitle,
+                BlogAuthor = x.BlogAuthor,
+                BlogContent = x.BlogContent
+            })
+                .ToList();
+
+            return View(lst);
         }
-
-        [ActionName("BlogListPage")]
-        public async Task<IActionResult> Index()
+        catch (Exception ex)
         {
-            try
-            {
-                var blogLst = await _context.Tbl_Blogs.AsNoTracking().ToListAsync();
-                var lst = blogLst.Select(x => new BlogModel()
-                {
-                    BlogId = x.BlogId,
-                    BlogTitle = x.BlogTitle,
-                    BlogAuthor = x.BlogAuthor,
-                    BlogContent = x.BlogContent
-                })
-                    .ToList();
-
-                return View(lst);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [ActionName("CreateBlogPage")]
-        public IActionResult CreateBlog()
+    [ActionName("CreateBlogPage")]
+    public IActionResult CreateBlog()
+    {
+        return View();
+    }
+
+    [ActionName("SaveAsync")]
+    [HttpPost]
+    public async Task<IActionResult> SaveAsync(BlogRequestModel requestModel)
+    {
+        try
         {
-            return View();
+            var entity = new Tbl_Blog()
+            {
+                BlogTitle = requestModel.BlogTitle,
+                BlogAuthor = requestModel.BlogAuthor,
+                BlogContent = requestModel.BlogContent
+            };
+
+            await _context.Tbl_Blogs.AddAsync(entity);
+            var result = await _context.SaveChangesAsync();
+
+            if (result == 1)
+            {
+                TempData["success"] = "Saving Successful.";
+            }
+            else
+            {
+                TempData["fail"] = "Saving Fail";
+            }
+
+            return RedirectToAction("BlogListPage");
         }
-
-        [ActionName("SaveAsync")]
-        [HttpPost]
-        public async Task<IActionResult> SaveAsync(BlogRequestModel requestModel)
+        catch (Exception ex)
         {
-            try
-            {
-                var entity = new Tbl_Blog()
-                {
-                    BlogTitle = requestModel.BlogTitle,
-                    BlogAuthor = requestModel.BlogAuthor,
-                    BlogContent = requestModel.BlogContent
-                };
-
-                await _context.Tbl_Blogs.AddAsync(entity);
-                var result = await _context.SaveChangesAsync();
-
-                if (result == 1)
-                {
-                    TempData["success"] = "Saving Successful.";
-                }
-                else
-                {
-                    TempData["fail"] = "Saving Fail";
-                }
-
-                return RedirectToAction("BlogListPage");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [ActionName("EditBlogPage")]
-        [HttpGet]
-        public async Task<IActionResult> EditBlogAsync(int id)
+    [ActionName("EditBlogPage")]
+    [HttpGet]
+    public async Task<IActionResult> EditBlogAsync(int id)
+    {
+        try
         {
-            try
+            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found.");
+            var blog = new BlogModel()
             {
-                var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found.");
-                var blog = new BlogModel()
-                {
-                    BlogId = item.BlogId,
-                    BlogTitle = item.BlogTitle,
-                    BlogAuthor = item.BlogAuthor,
-                    BlogContent = item.BlogContent
-                };
+                BlogId = item.BlogId,
+                BlogTitle = item.BlogTitle,
+                BlogAuthor = item.BlogAuthor,
+                BlogContent = item.BlogContent
+            };
 
-                return View(blog);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return View(blog);
         }
-
-        [ActionName("UpdateAsync")]
-        [HttpPost]
-        public async Task<IActionResult> UpdateAsync(BlogRequestModel requestModel, int id)
+        catch (Exception ex)
         {
-            try
-            {
-                var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("NO DATA FOund.");
-
-                item.BlogTitle = requestModel.BlogTitle;
-                item.BlogAuthor = requestModel.BlogAuthor;
-                item.BlogContent = requestModel.BlogContent;
-
-                int result = await _context.SaveChangesAsync();
-
-                if (result > 0)
-                {
-                    TempData["success"] = "Updating Successful.";
-                }
-                else
-                {
-                    TempData["fail"] = "Updating Fail.";
-                }
-
-                return RedirectToAction("BlogListPage");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [ActionName("DeleteAsync")]
-        [HttpGet]
-        public async Task<IActionResult> DeleteAsync(int id)
+    [ActionName("UpdateAsync")]
+    [HttpPost]
+    public async Task<IActionResult> UpdateAsync(BlogRequestModel requestModel, int id)
+    {
+        try
         {
-            try
-            {
-                var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No Data Found.");
-                _context.Tbl_Blogs.Remove(item);
+            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("NO DATA FOund.");
 
-                int result = await _context.SaveChangesAsync();
-                if (result > 0)
-                {
-                    TempData["success"] = "Deleting Successful.";
-                }
-                else
-                {
-                    TempData["fail"] = "Deleting Fail.";
-                }
+            item.BlogTitle = requestModel.BlogTitle;
+            item.BlogAuthor = requestModel.BlogAuthor;
+            item.BlogContent = requestModel.BlogContent;
 
-                return RedirectToAction("BlogListPage");
-            }
-            catch (Exception ex)
+            int result = await _context.SaveChangesAsync();
+
+            if (result > 0)
             {
-                throw new Exception(ex.Message);
+                TempData["success"] = "Updating Successful.";
             }
+            else
+            {
+                TempData["fail"] = "Updating Fail.";
+            }
+
+            return RedirectToAction("BlogListPage");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    [ActionName("DeleteAsync")]
+    [HttpGet]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        try
+        {
+            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No Data Found.");
+            _context.Tbl_Blogs.Remove(item);
+
+            int result = await _context.SaveChangesAsync();
+            if (result > 0)
+            {
+                TempData["success"] = "Deleting Successful.";
+            }
+            else
+            {
+                TempData["fail"] = "Deleting Fail.";
+            }
+
+            return RedirectToAction("BlogListPage");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }
