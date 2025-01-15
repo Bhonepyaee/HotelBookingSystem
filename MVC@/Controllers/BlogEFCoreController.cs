@@ -20,13 +20,14 @@ public class BlogEFCoreController : Controller
         try
         {
             var blogLst = await _context.Tbl_Blogs.AsNoTracking().ToListAsync();
-            var lst = blogLst.Select(x => new BlogModel()
-            {
-                BlogId = x.BlogId,
-                BlogTitle = x.BlogTitle,
-                BlogAuthor = x.BlogAuthor,
-                BlogContent = x.BlogContent
-            })
+            var lst = blogLst
+                .Select(x => new BlogModel()
+                {
+                    BlogId = x.BlogId,
+                    BlogTitle = x.BlogTitle,
+                    BlogAuthor = x.BlogAuthor,
+                    BlogContent = x.BlogContent,
+                })
                 .ToList();
 
             return View(lst);
@@ -53,7 +54,7 @@ public class BlogEFCoreController : Controller
             {
                 BlogTitle = requestModel.BlogTitle,
                 BlogAuthor = requestModel.BlogAuthor,
-                BlogContent = requestModel.BlogContent
+                BlogContent = requestModel.BlogContent,
             };
 
             await _context.Tbl_Blogs.AddAsync(entity);
@@ -82,13 +83,14 @@ public class BlogEFCoreController : Controller
     {
         try
         {
-            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found.");
+            var item =
+                await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found.");
             var blog = new BlogModel()
             {
                 BlogId = item.BlogId,
                 BlogTitle = item.BlogTitle,
                 BlogAuthor = item.BlogAuthor,
-                BlogContent = item.BlogContent
+                BlogContent = item.BlogContent,
             };
 
             return View(blog);
@@ -105,7 +107,8 @@ public class BlogEFCoreController : Controller
     {
         try
         {
-            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("NO DATA FOund.");
+            var item =
+                await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("NO DATA FOund.");
 
             item.BlogTitle = requestModel.BlogTitle;
             item.BlogAuthor = requestModel.BlogAuthor;
@@ -136,7 +139,8 @@ public class BlogEFCoreController : Controller
     {
         try
         {
-            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No Data Found.");
+            var item =
+                await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No Data Found.");
             _context.Tbl_Blogs.Remove(item);
 
             int result = await _context.SaveChangesAsync();
