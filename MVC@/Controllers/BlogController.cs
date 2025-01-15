@@ -5,156 +5,155 @@ using Microsoft.AspNetCore.Mvc;
 using MVC_.Models;
 using MVC_.Queries;
 
-namespace MVC_.Controllers
+namespace MVC_.Controllers;
+
+public class BlogController : Controller
 {
-    public class BlogController : Controller
+    internal readonly IConfiguration _configuration;
+
+    public BlogController(IConfiguration configuration)
     {
-        internal readonly IConfiguration _configuration;
+        _configuration = configuration;
+    }
 
-        public BlogController(IConfiguration configuration)
+    [ActionName("BlogListPage")]
+    public async Task<IActionResult> Index()
+    {
+        try
         {
-            _configuration = configuration;
+            string query = BlogQuery.BlogListQuery;
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            var lst = await db.QueryAsync<BlogModel>(query);
+
+            return View(lst);
         }
-
-        [ActionName("BlogListPage")]
-        public async Task<IActionResult> Index()
+        catch(Exception ex)
         {
-            try
-            {
-                string query = BlogQuery.BlogListQuery;
-                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
-                var lst = await db.QueryAsync<BlogModel>(query);
-
-                return View(lst);
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [ActionName("CreateBlogPage")]
-        public IActionResult CreateBlog()
+    [ActionName("CreateBlogPage")]
+    public IActionResult CreateBlog()
+    {
+        return View();
+    }
+
+    [ActionName("SaveAsync")]
+    [HttpPost]
+    public async Task<IActionResult> SaveAsync(BlogRequestModel requestModel)
+    {
+        try
         {
-            return View();
+            string query = BlogQuery.CreateBlogQuery;
+            var parameters = new
+            {
+                requestModel.BlogTitle,
+                requestModel.BlogAuthor,
+                requestModel.BlogContent,
+            };
+
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            int result = await db.ExecuteAsync(query, parameters);
+
+            if(result == 1)
+            {
+                TempData["success"] = "Saving Successful";
+            }
+            else
+            {
+                TempData["fail"] = "Saving Fail";
+            }
+
+            return RedirectToAction("BlogListPage");
         }
-
-        [ActionName("SaveAsync")]
-        [HttpPost]
-        public async Task<IActionResult> SaveAsync(BlogRequestModel requestModel)
+        catch (Exception ex)
         {
-            try
-            {
-                string query = BlogQuery.CreateBlogQuery;
-                var parameters = new
-                {
-                    requestModel.BlogTitle,
-                    requestModel.BlogAuthor,
-                    requestModel.BlogContent,
-                };
-
-                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
-                int result = await db.ExecuteAsync(query, parameters);
-
-                if(result == 1)
-                {
-                    TempData["success"] = "Saving Successful";
-                }
-                else
-                {
-                    TempData["fail"] = "Saving Fail";
-                }
-
-                return RedirectToAction("BlogListPage");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [ActionName("EditBlogPage")]
-        [HttpGet]
-        public async Task<IActionResult> EditBlogAsync(int id)
+    [ActionName("EditBlogPage")]
+    [HttpGet]
+    public async Task<IActionResult> EditBlogAsync(int id)
+    {
+        try
         {
-            try
-            {
-                string query = BlogQuery.GetBlogListQuery;
-                var parameters = new { BlogId = id };
+            string query = BlogQuery.GetBlogListQuery;
+            var parameters = new { BlogId = id };
 
-                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
-                var lst = await db.QueryAsync<BlogModel>(query, parameters);
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            var lst = await db.QueryAsync<BlogModel>(query, parameters);
 
-                return View(lst);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return View(lst);
         }
-
-        [ActionName("UpdateBlogAsync")]
-        [HttpPost]
-        public async Task<IActionResult> UpdateBlogAsync(BlogRequestModel requestModel, int id)
+        catch (Exception ex)
         {
-            try
-            {
-                string query = BlogQuery.UpdateBlogListQuery;
-                var parameters = new
-                {
-                    requestModel.BlogTitle,
-                    requestModel.BlogAuthor,
-                    requestModel.BlogContent,
-                    BlogId = id
-                };
-
-                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
-                int result = await db.ExecuteAsync(query, parameters);
-
-                if (result > 0)
-                {
-                    TempData["success"] = "Updating Successful.";
-                }
-                else
-                {
-                    TempData["fail"] = "Updating Fail.";
-                }
-
-                return RedirectToAction("BlogListPage");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception(ex.Message);
         }
+    }
 
-        [ActionName("DeleteAsync")]
-        [HttpGet]
-        public async Task<IActionResult> DeleteAsync(int id)
+    [ActionName("UpdateBlogAsync")]
+    [HttpPost]
+    public async Task<IActionResult> UpdateBlogAsync(BlogRequestModel requestModel, int id)
+    {
+        try
         {
-            try
+            string query = BlogQuery.UpdateBlogListQuery;
+            var parameters = new
             {
-                string query = @"DELETE Tbl_Blog WHERE BlogId = @BlogId";
-                var parameters = new { BlogId = id };
+                requestModel.BlogTitle,
+                requestModel.BlogAuthor,
+                requestModel.BlogContent,
+                BlogId = id
+            };
 
-                using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
-                int result = await db.ExecuteAsync(query, parameters);
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            int result = await db.ExecuteAsync(query, parameters);
 
-                if (result > 0)
-                {
-                    TempData["success"] = "Deleting Successful.";
-                }
-                else
-                {
-                    TempData["fail"] = "Deleting Fail.";
-                }
-
-                return RedirectToAction("BlogListPage");
-            }
-            catch (Exception ex)
+            if (result > 0)
             {
-                throw new Exception(ex.Message);
+                TempData["success"] = "Updating Successful.";
             }
+            else
+            {
+                TempData["fail"] = "Updating Fail.";
+            }
+
+            return RedirectToAction("BlogListPage");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    [ActionName("DeleteAsync")]
+    [HttpGet]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        try
+        {
+            string query = @"DELETE Tbl_Blog WHERE BlogId = @BlogId";
+            var parameters = new { BlogId = id };
+
+            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            int result = await db.ExecuteAsync(query, parameters);
+
+            if (result > 0)
+            {
+                TempData["success"] = "Deleting Successful.";
+            }
+            else
+            {
+                TempData["fail"] = "Deleting Fail.";
+            }
+
+            return RedirectToAction("BlogListPage");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }
