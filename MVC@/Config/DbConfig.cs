@@ -1,8 +1,7 @@
-﻿namespace MVC_.Config
+﻿namespace MVC_.Config;
+
+public class DbConfig
 {
-    public class DbConfig
-    {
-        public static string GetConnectionString() =>
-            "Server=.;Database=bhone pyae;User ID=sa;Password=sasa@123;TrustServerCertificate=True;";
-    }
+    public static string GetConnectionString() =>
+        "Server=.;Database=bhone pyae;User ID=sa;Password=sasa@123;TrustServerCertificate=True;";
 }
