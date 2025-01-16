@@ -1,8 +1,7 @@
-﻿namespace MVC.Models
+﻿namespace MVC.Models;
+
+public class BlogListResponseModel
 {
-    public class BlogListResponseModel
-    {
-        public PageSettingModel PageSetting { get; set; }
-        public List<BlogModel> Blogs { get; set; }
-    }
+    public PageSettingModel PageSetting { get; set; }
+    public List<BlogModel> Blogs { get; set; }
 }
