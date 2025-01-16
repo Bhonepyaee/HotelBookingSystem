@@ -22,7 +22,9 @@ public class BlogController : Controller
         try
         {
             string query = BlogQuery.BlogListQuery;
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             var lst = await db.QueryAsync<BlogModel>(query);
 
             return View(lst.ToList());
@@ -53,7 +55,9 @@ public class BlogController : Controller
                 requestModel.BlogContent,
             };
 
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
 
             int result = await db.ExecuteAsync(query, parameters);
             if (result > 0)
@@ -81,7 +85,9 @@ public class BlogController : Controller
         {
             string query = BlogQuery.GetBlogByIdQuery;
             var parameters = new { BlogId = id };
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             var lst = await db.QueryAsync<BlogModel>(query, parameters);
 
             return View(lst);
@@ -104,10 +110,12 @@ public class BlogController : Controller
                 requestModel.BlogTitle,
                 requestModel.BlogAuthor,
                 requestModel.BlogContent,
-                BlogId = id
+                BlogId = id,
             };
 
-            using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+            using IDbConnection db = new SqlConnection(
+                _configuration.GetConnectionString("DbConnection")
+            );
             int result = await db.ExecuteAsync(query, parameters);
 
             if (result > 0)
@@ -117,7 +125,6 @@ public class BlogController : Controller
             else
             {
                 TempData["fail"] = "Updating Fail.";
-
             }
 
             return RedirectToAction("BlogListPage");
@@ -132,12 +139,11 @@ public class BlogController : Controller
     public async Task<IActionResult> DeleteBlogAsync(int id)
     {
         string query = BlogQuery.DeleteBlogQuery;
-        var parameters = new
-        {
-            BlogId = id
-        };
+        var parameters = new { BlogId = id };
 
-        using IDbConnection db = new SqlConnection(_configuration.GetConnectionString("DbConnection"));
+        using IDbConnection db = new SqlConnection(
+            _configuration.GetConnectionString("DbConnection")
+        );
 
         int result = await db.ExecuteAsync(query, parameters);
 
