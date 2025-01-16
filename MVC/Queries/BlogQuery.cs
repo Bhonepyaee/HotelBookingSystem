@@ -3,7 +3,7 @@
 public class BlogQuery
 {
     public static string GetBlogByIdQuery { get; } =
-       @"SELECT BlogId,BlogTitle,BlogAuthor,BlogContent
+        @"SELECT BlogId,BlogTitle,BlogAuthor,BlogContent
               FROM Tbl_Blog WHERE BlogId = @BlogId";
 
     public static string BlogListQuery { get; } =
@@ -18,6 +18,5 @@ public class BlogQuery
         @"UPDATE Tbl_Blog SET BlogTitle = @BlogTitle, BlogAuthor = @BlogAuthor, 
             BlogContent = @BlogContent WHERE BlogId =@BlogId";
 
-    public static string DeleteBlogQuery { get; } =
-        @"DELETE FROM Tbl_Blog WHERE BlogId = @BlogId";
+    public static string DeleteBlogQuery { get; } = @"DELETE FROM Tbl_Blog WHERE BlogId = @BlogId";
 }
