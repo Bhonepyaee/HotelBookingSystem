@@ -6,7 +6,6 @@ namespace MVC.DB;
 [Table("Tbl_Blog")]
 public class Tbl_Blog
 {
-
     [Key]
     public int BlogId { get; set; }
     public string BlogTitle { get; set; }
