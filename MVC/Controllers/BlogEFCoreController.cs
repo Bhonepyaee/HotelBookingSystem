@@ -21,32 +21,39 @@ public class BlogEFCoreController : Controller
         {
             var query = _context.Tbl_Blogs.AsNoTracking();
 
-
             var blogLst = await query.Skip((pageNo - 1) * pageSize).Take(pageSize).ToListAsync();
 
             int rowCount = await query.CountAsync();
             int pageCount = rowCount / pageSize;
-            if(rowCount % pageSize > 0)
+            if (rowCount % pageSize > 0)
             {
                 pageCount++;
             }
-            PageSettingModel pageSetting = new(pageNo, pageSize, pageCount, rowCount, "/BlogEFCore/BlogListPage");
+            PageSettingModel pageSetting = new(
+                pageNo,
+                pageSize,
+                pageCount,
+                rowCount,
+                "/BlogEFCore/BlogListPage"
+            );
 
             var model = new BlogListResponseModel()
             {
-                Blogs = blogLst.Select(x => new BlogModel()
-                {
-                    BlogId = x.BlogId,
-                    BlogTitle = x.BlogTitle,
-                    BlogAuthor = x.BlogAuthor,
-                    BlogContent = x.BlogContent
-                }).ToList(),
+                Blogs = blogLst
+                    .Select(x => new BlogModel()
+                    {
+                        BlogId = x.BlogId,
+                        BlogTitle = x.BlogTitle,
+                        BlogAuthor = x.BlogAuthor,
+                        BlogContent = x.BlogContent,
+                    })
+                    .ToList(),
                 PageSetting = pageSetting,
             };
-        
+
             return View(model);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception(ex.Message);
         }
@@ -67,7 +74,7 @@ public class BlogEFCoreController : Controller
             {
                 BlogTitle = requestModel.BlogTitle,
                 BlogAuthor = requestModel.BlogAuthor,
-                BlogContent = requestModel.BlogContent
+                BlogContent = requestModel.BlogContent,
             };
 
             await _context.Tbl_Blogs.AddAsync(entity);
@@ -79,7 +86,6 @@ public class BlogEFCoreController : Controller
             }
             else
             {
-
                 TempData["success"] = "Saving Successful.";
             }
 
@@ -97,13 +103,14 @@ public class BlogEFCoreController : Controller
     {
         try
         {
-            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found.");
+            var item =
+                await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found.");
             var blog = new BlogModel()
             {
                 BlogId = item.BlogId,
                 BlogTitle = item.BlogTitle,
                 BlogAuthor = item.BlogAuthor,
-                BlogContent = item.BlogContent
+                BlogContent = item.BlogContent,
             };
 
             return View(blog);
@@ -120,7 +127,8 @@ public class BlogEFCoreController : Controller
     {
         try
         {
-            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found");
+            var item =
+                await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found");
 
             item.BlogTitle = requestModel.BlogTitle;
             item.BlogAuthor = requestModel.BlogAuthor;
@@ -151,7 +159,8 @@ public class BlogEFCoreController : Controller
     {
         try
         {
-            var item = await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found");
+            var item =
+                await _context.Tbl_Blogs.FindAsync(id) ?? throw new Exception("No data found");
 
             _context.Tbl_Blogs.Remove(item);
 
